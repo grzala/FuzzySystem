@@ -71,7 +71,10 @@ void Settings::readSettingsFromString(string sets)
     vector<string> lines;
 
     for (string line; getline(iss, line);)
-        lines.push_back(line);
+    {
+        if (line.size() == 0 || (line.size() > 1 && line.at(0) != '#')) //ignore comments
+            lines.push_back(line);
+    }
 
     enum readState {
         RULEBASE,
