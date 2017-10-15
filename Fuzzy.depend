@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1508023684 source:c:\users\grzala\desktop\fuzzy\main.cpp
+	<iostream>
+	<stdexcept>
+	"Settings.h"
+
+1508029473 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
+	"Settings.h"
+
+1508028496 c:\users\grzala\desktop\fuzzy\include\settings.h
+	<iostream>
+	<fstream>
+	<stdexcept>
+	<sstream>
+	<vector>
+
