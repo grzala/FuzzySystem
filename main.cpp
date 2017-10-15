@@ -7,11 +7,7 @@ int main()
 {
     Settings* s = Settings::instance();
 
-    try {
-        s->readSettingsFromFile("example.txt");
-    } catch (const std::exception& e) {
-        cout << e.what();
-    }
+    s->readSettingsFromFile("example.txt");
 
 
 

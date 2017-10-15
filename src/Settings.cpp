@@ -28,24 +28,30 @@ Settings* Settings::instance()
 //init settings from file
 void Settings::readSettingsFromFile(string path)
 {
-    //open file
-    ifstream inFile;
-    inFile.open(path);
+    try {
+        //open file
+        ifstream inFile;
+        inFile.open(path);
 
-    //if file does not exists, report exception
-    if (!inFile)
-        throw runtime_error("Settings file not found, settings remain unchanged");
+        //if file does not exists, report exception
+        if (!inFile)
+            throw runtime_error("Settings file not found, settings remain unchanged");
 
-    //read file to string
-    std::stringstream contentstream;
-    contentstream << inFile.rdbuf();
-    string content = contentstream.str();
+        //read file to string
+        std::stringstream contentstream;
+        contentstream << inFile.rdbuf();
+        string content = contentstream.str();
 
-    //close file
-    inFile.close();
+        //close file
+        inFile.close();
 
-    //set settings
-    readSettingsFromString(content);
+        //set settings
+        readSettingsFromString(content);
+
+    } catch(const std::exception& e) {
+        cout << "Settings not set, file " + path + " not found" << endl;
+        return;
+    }
 }
 
 bool isWhiteSpaceString(string s)
@@ -58,9 +64,15 @@ void nextLine(vector<string> lines, unsigned int* i, bool find_non_empty = false
 {
     while (isWhiteSpaceString(lines[*i]) == find_non_empty) //move to next non empty line
     {
-        if (*i == lines.size())
-            return; //EOS
         (*i)++;
+        if (*i == lines.size()) //end of vector reached
+        {
+            (*i) --; //leave counter at last line to prevent out of bounds exception
+            string err = "Runtime Exception: End of file reached, no ";
+            err.append((find_non_empty) ? "non-empty" : "empty");
+            err.append(" lines found\n");
+            throw runtime_error(err);
+        }
     }
 }
 
@@ -89,48 +101,90 @@ void Settings::readSettingsFromString(string sets)
     const int input_total = 3;
     unsigned int i = 0;
 
+    string rulebaseName;
+    vector<string>rules;
+
+    vector<string> inputNames;
+    vector<vector<string>> inputs;
+
+    vector<string> values;
+
+    try {
+
+    cout << "Parsing file..." << endl;
     while (state != FINISHED) {
 
         switch(state)
         {
         case RULEBASE:
+                cout << "Parsing rulebase..." << endl;
                 //get first non-empty
                 nextLine(lines, &i, true);
-                cout << "RULEBASE NAME: " << lines[i] << endl;
+                rulebaseName = lines[i];
+                cout << "Rulebase Name: " << rulebaseName << endl;
                 i++; nextLine(lines, &i, true); //go to rules
                 //get rules
                 nextLine(lines, &i, true);
+
+                cout << "Rules:" << endl;
                 while (!isWhiteSpaceString(lines[i]))
                 {
-                    cout << "Rule X: " << lines[i] << endl;
+                    cout << lines[i] << endl;
+                    rules.push_back(lines[i]);
                     i++;
                 }
+                cout << endl;
 
                 state = INPUT;
             break;
 
         case INPUT:
+            {
                 //get first non empty
+                cout << "Parsing crisp..." << endl;
                 nextLine(lines, &i, true);
-                cout << "Input " << input_no << ": " << lines[i] << endl;
-                i++; nextLine(lines, &i, true); //go to values
+                cout << "Crisp " << input_no << ": " << lines[i] << endl;
+                inputNames.push_back(lines[i]);
 
+                i++; nextLine(lines, &i, true); //go to values
+                vector<string> crispValues;
                 while (!isWhiteSpaceString(lines[i]))
                 {
-                    cout << "Rule X: " << lines[i] << endl;
+                    cout << lines[i] << endl;
+                    crispValues.push_back(lines[i]);
                     i++;
                 }
+                inputs.push_back(crispValues);
+                cout << endl;
 
                 input_no++;
                 if (input_no == input_total)
                     state = VALUES;
+            }
             break;
 
         case VALUES:
-                nextLine(lines, &i, true);
-                cout << "VAL1: " << lines[i] << endl;
-                i++;
-                cout << "VAL2: " << lines[i] << endl;
+                cout << "Parsing values:" << endl;
+                try { //if values are given in the end of file
+                    nextLine(lines, &i, true);
+                    cout << "value 1: " << lines[i] << endl;
+                    values.push_back(lines[i]);
+                    i++;
+                    cout << "value 2: " << lines[i] << endl;
+                    values.push_back(lines[i]);
+                } catch(std::exception& e) { //if no values are found, ask for manual input
+                    cout << "No values were given or incorrectly defined. You can input them manually:" << endl;
+                    cout << inputNames[0] << " = ";
+                    string in;
+                    cin >> in;
+                    in = inputNames[0].append(" = " + in);
+                    values.push_back(in);
+
+                    cout << inputNames[1] << " = ";
+                    cin >> in;
+                    in = inputNames[1].append(" = " + in);
+                    values.push_back(in);
+                }
 
                 state = FINISHED;
 
@@ -142,4 +196,15 @@ void Settings::readSettingsFromString(string sets)
         }
 
     }
+
+    } catch (const std::exception& e) {
+        cout << endl << "Error: Settings not initialized." << endl;
+        cout << e.what();
+        cout << "Is your input file properly structured?" << endl;
+
+        return;
+    }
+
+    cout << "Settings parsed. Applying settings..." << endl;
+
 }
