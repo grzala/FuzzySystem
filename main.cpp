@@ -3,6 +3,7 @@
 
 #include "Settings.h"
 
+//g++ min 4.9
 int main()
 {
     Settings* s = Settings::instance();

@@ -7,9 +7,13 @@
 #include <sstream>
 #include <vector>
 #include <array>
+#include <map>
+#include <algorithm>
 
+#include "Rulebase.h"
 #include "Crisp.h"
 #include "FuzzySet.h"
+
 
 using namespace std;
 
@@ -29,6 +33,15 @@ class Settings
     private:
         static Settings *s_instance;
         bool initialized;
+
+        Rulebase rulebase;
+
+        Crisp crispIn1;
+        Crisp crispIn2;
+        Crisp crispOut;
+
+        map<string, float> values;
+
 };
 
 

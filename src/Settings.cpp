@@ -30,7 +30,8 @@ void Settings::readSettingsFromFile(string path)
 {
     string content;
 
-    try {
+    try
+    {
         //open file
         ifstream inFile;
         inFile.open(path);
@@ -47,7 +48,8 @@ void Settings::readSettingsFromFile(string path)
         //close file
         inFile.close();
 
-    } catch(const std::exception& e) {
+    } catch(const std::exception& e)
+    {
         cout << "Settings not set, file " + path + " not found" << endl;
         return;
     }
@@ -111,7 +113,8 @@ void Settings::readSettingsFromString(string sets)
 
     vector<string> values;
 
-    try {
+    try
+    {
 
     cout << "Parsing file..." << endl;
     while (state != FINISHED) {
@@ -199,26 +202,102 @@ void Settings::readSettingsFromString(string sets)
 
     }
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception& e)
+    {
         cout << endl << "Error: Settings not initialized." << endl;
         cout << e.what();
         cout << "Is your input file properly structured?" << endl;
 
         return;
     }
+    cout << endl << "Settings parsed. Applying settings..." << endl;
 
-    cout << "Settings parsed. Applying settings..." << endl;
+    //settings parsed.
+    //now apply settings.
+    //do not changed settings until everything is properly initialized
+    cout << "Applying rulebase..." << endl;
+    Rulebase* rb;
+    try
+    {
+        rb = new Rulebase(rulebaseName, rules);
+    } catch (const exception& e)
+    {
+        cout << "Failed to apply rulebase." << endl;
+        cout << e.what() << endl;
+        cout << "Settings not applied." << endl;
+        return;
+    }
+    cout << "Rulebase applied." << endl;
 
     cout << "Applying crisp input settings..." << endl;
-    for (unsigned int i = 0; i < inputNames.size(); i++)
+    array<Crisp, 3> crisps;
+    try
     {
-        array<FuzzySet, 3> sets;
-        for (unsigned int j = 0; j < inputs[i].size(); j++)
+        for (unsigned int i = 0; i < inputNames.size(); i++)
         {
-            FuzzySet f(inputs[i][j]);
-            sets[j] = f;
+            array<FuzzySet, 3> sets;
+            for (unsigned int j = 0; j < inputs[i].size(); j++)
+            {
+                FuzzySet f(inputs[i][j]);
+                sets[j] = f;
+            }
+            Crisp c(inputNames[i], sets);
+            crisps[i] = c;
         }
-        Crisp c(inputNames[i], sets);
-        cout << c.toString() << endl;
+    } catch (const exception& e)
+    {
+        cout << "Error while applying crisp input settings." << endl;
+        cout << e.what() << endl;
+        cout << "Settings remain unchanged." << endl;
+        return;
     }
+    cout << "Crisp settings applied." << endl;
+
+    cout << "Applying values..." << endl;
+    map<string, float> vals;
+    try
+    {
+        for (unsigned int i = 0; i < values.size(); i++)
+        {
+            //remove spaces
+            string curval = values[i];
+            curval.erase(std::remove(curval.begin(), curval.end(), ' '), curval.end());
+
+            vector<string> tokens;
+            const char *str = curval.c_str();
+            char c = '='; //split by =
+            do
+            {
+                const char *begin = str;
+                while(*str != c && *str)
+                str++;
+                tokens.push_back(string(begin, str));
+            } while (0 != *str++);
+
+            if (tokens.size() != 2) {
+                throw invalid_argument("Values did not follow convention: inputname = value");
+            }
+
+            vals[tokens[0]] = stof(tokens[1]);
+        }
+    } catch (const exception& e)
+    {
+        cout << "Error parsing values. Values must be written as: inputname = value" << endl;
+        cout << e.what() << endl;
+        cout << "Settings were not applied." << endl;
+        return;
+    }
+    cout << "Values applied" << endl;
+
+    //permanent set settings
+    rulebase = *rb;
+
+    crispIn1 = crisps[0];
+    crispIn2 = crisps[1];
+    crispOut = crisps[2];
+
+    this->values = vals;
+
+    initialized = true;
+    cout << "Settings applied successfully";
 }

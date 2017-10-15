@@ -12,6 +12,7 @@
 class Crisp
 {
     public:
+        Crisp();
         Crisp(string name, array<FuzzySet, 3> fuzzysets);
         Crisp(string name, vector<FuzzySet> fuzzysets);
         ~Crisp();

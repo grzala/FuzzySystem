@@ -1,19 +1,22 @@
 # depslib dependency file v1.0
-1508072281 source:c:\users\grzala\desktop\fuzzy\main.cpp
+1508092757 source:c:\users\grzala\desktop\fuzzy\main.cpp
 	<iostream>
 	<stdexcept>
 	"Settings.h"
 
-1508084354 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
+1508091641 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
 	"Settings.h"
 
-1508084319 c:\users\grzala\desktop\fuzzy\include\settings.h
+1508089208 c:\users\grzala\desktop\fuzzy\include\settings.h
 	<iostream>
 	<fstream>
 	<stdexcept>
 	<sstream>
 	<vector>
 	<array>
+	<map>
+	<algorithm>
+	"Rulebase.h"
 	"Crisp.h"
 	"FuzzySet.h"
 
@@ -28,14 +31,32 @@
 1508085540 source:c:\users\grzala\desktop\fuzzy\src\fuzzyset.cpp
 	"FuzzySet.h"
 
-1508085401 source:c:\users\grzala\desktop\fuzzy\src\crisp.cpp
+1508085843 source:c:\users\grzala\desktop\fuzzy\src\crisp.cpp
 	"Crisp.h"
 
-1508085589 c:\users\grzala\desktop\fuzzy\include\crisp.h
+1508085837 c:\users\grzala\desktop\fuzzy\include\crisp.h
 	<string>
 	<sstream>
 	<array>
 	<vector>
 	<exception>
 	"FuzzySet.h"
+
+1508090953 c:\users\grzala\desktop\fuzzy\include\rulebase.h
+	<string>
+	<vector>
+	"Rule.h"
+
+1508090940 source:c:\users\grzala\desktop\fuzzy\src\rulebase.cpp
+	"Rulebase.h"
+
+1508094237 c:\users\grzala\desktop\fuzzy\include\rule.h
+	<iostream>
+	<string>
+	<regex>
+	<algorithm>
+	<exception>
+
+1508097964 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
+	"Rule.h"
 

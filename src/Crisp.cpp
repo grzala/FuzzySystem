@@ -1,5 +1,10 @@
 #include "Crisp.h"
 
+Crisp::Crisp()
+{
+    name = "";
+}
+
 Crisp::~Crisp()
 {
 
