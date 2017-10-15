@@ -50,7 +50,7 @@
 1508090940 source:c:\users\grzala\desktop\fuzzy\src\rulebase.cpp
 	"Rulebase.h"
 
-1508094237 c:\users\grzala\desktop\fuzzy\include\rule.h
+1508101015 c:\users\grzala\desktop\fuzzy\include\rule.h
 	<iostream>
 	<string>
 	<regex>

@@ -49,15 +49,39 @@ Rule::Rule(string rule)
     }
 
 
-    //antecendent
+    //antecendent1
     str = rule;
     r = regex("\\bif\\b(.*?)\\b" + operand + "\\b");
     regex_search(str, m, r);
-    if (m.size() < 2)
-        throw invalid_argument("Rule ill defined, no IF found.");
+    if (m.size() < 2) throw invalid_argument("Rule ill defined, no IF found.");
 
     string antecendent = m[1];
-    cout << antecendent << endl;
+
+    str = antecendent;
+    r = regex("([A-z]+) is ([A-z]+)");
+    regex_search(str, m, r);
+    if (m.size() < 3) throw invalid_argument("Rule ill defined, something went wrong.");
+    antecedenceInput1 = m[1];
+    antecedenceCondition1 = m[2];
+
+
+    //antecendent2
+    str = rule;
+    r = regex("\\b" + operand + "\\b(.*?)\\bthen\\b");
+    regex_search(str, m, r);
+    if (m.size() < 2) throw invalid_argument("Rule ill defined, no IF found.");
+
+    string antecedent2 = m[1];
+
+    str = antecedent2;
+    r = regex("([A-z]+) is ([A-z]+)");
+    regex_search(str, m, r);
+    if (m.size() < 3) throw invalid_argument("Rule ill defined, something went wrong.");
+    antecedenceInput2 = m[1];
+    antecedenceCondition2 = m[2];
+
+    cout << antecedenceInput2 << endl;
+    cout << antecedenceCondition2 << endl;
 
     cout << endl;
 }

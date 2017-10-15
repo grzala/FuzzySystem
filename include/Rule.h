@@ -24,13 +24,13 @@ class Rule
         virtual ~Rule();
 
     private:
-        string antendenceInput1;
-        string antendenceCondition1;
+        string antecedenceInput1;
+        string antecedenceCondition1;
 
         SetOperation operation;
 
-        string antendenceInput2;
-        string antendenceCondition2;
+        string antecedenceInput2;
+        string antecedenceCondition2;
 
         string consequenceOutput;
         string consequence;
