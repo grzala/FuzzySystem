@@ -80,8 +80,20 @@ Rule::Rule(string rule)
     antecedenceInput2 = m[1];
     antecedenceCondition2 = m[2];
 
-    cout << antecedenceInput2 << endl;
-    cout << antecedenceCondition2 << endl;
+    //consequent
+    str = rule;
+    r = regex("\\bthen\\b(.*?)$");
+    regex_search(str, m, r);
+    if (m.size() < 2) throw invalid_argument("Rule ill defined, no THEN found.");
+
+    string consequent = m[1];
+
+    str = consequent;
+    r = regex("([A-z]+) will be ([A-z]+)");
+    regex_search(str, m, r);
+    if (m.size() < 3) throw invalid_argument("Rule ill defined, something went wrong.");
+    consequenceOutput = m[1];
+    consequence = m[2];
 
     cout << endl;
 }
