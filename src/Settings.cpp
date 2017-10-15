@@ -77,16 +77,16 @@ void Settings::readSettingsFromString(string sets)
         RULEBASE,
         INPUT,
         VALUES,
+        FINISHED,
     };
 
     readState state = RULEBASE;
-    bool lastCharacterWhite = false;
 
     int input_no = 0;
     const int input_total = 3;
     unsigned int i = 0;
 
-    while (i < lines.size()) {
+    while (state != FINISHED) {
 
         switch(state)
         {
@@ -129,10 +129,14 @@ void Settings::readSettingsFromString(string sets)
                 i++;
                 cout << "VAL2: " << lines[i] << endl;
 
+                state = FINISHED;
+
+            break;
+
+        case FINISHED:
             break;
 
         }
 
-        i++; //nextLine
     }
 }
