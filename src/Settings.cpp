@@ -48,6 +48,22 @@ void Settings::readSettingsFromFile(string path)
     readSettingsFromString(content);
 }
 
+bool isWhiteSpaceString(string s)
+{
+    return (s.find_first_not_of(" \t\n\v\f\r") == string::npos);
+}
+
+//find next empty or non empty line (omit current line)
+void nextLine(vector<string> lines, unsigned int* i, bool find_non_empty = false)
+{
+    while (isWhiteSpaceString(lines[*i]) == find_non_empty) //move to next non empty line
+    {
+        if (*i == lines.size())
+            return; //EOS
+        (*i)++;
+    }
+}
+
 void Settings::readSettingsFromString(string sets)
 {
     //interpret string line by line
@@ -66,25 +82,57 @@ void Settings::readSettingsFromString(string sets)
     readState state = RULEBASE;
     bool lastCharacterWhite = false;
 
+    int input_no = 0;
+    const int input_total = 3;
     unsigned int i = 0;
 
     while (i < lines.size()) {
+
         switch(state)
         {
         case RULEBASE:
-            //if(line.find_first_not_of(' ') == string::npos)
-            cout << "RULEBASE NAME: " << lines[i] << endl;
-            i++; //next line
-            while (lines[i].find_first_not_of(' ') == string::npos) //move to next non empty line
-                i++;
+                //get first non-empty
+                nextLine(lines, &i, true);
+                cout << "RULEBASE NAME: " << lines[i] << endl;
+                i++; nextLine(lines, &i, true); //go to rules
+                //get rules
+                nextLine(lines, &i, true);
+                while (!isWhiteSpaceString(lines[i]))
+                {
+                    cout << "Rule X: " << lines[i] << endl;
+                    i++;
+                }
 
-            //get rules
-            while (lines[i].find_first_not_of(' ') == string::npos) //move to next non empty line
-
-            state = INPUT;
+                state = INPUT;
             break;
+
+        case INPUT:
+                //get first non empty
+                nextLine(lines, &i, true);
+                cout << "Input " << input_no << ": " << lines[i] << endl;
+                i++; nextLine(lines, &i, true); //go to values
+
+                while (!isWhiteSpaceString(lines[i]))
+                {
+                    cout << "Rule X: " << lines[i] << endl;
+                    i++;
+                }
+
+                input_no++;
+                if (input_no == input_total)
+                    state = VALUES;
+            break;
+
+        case VALUES:
+                nextLine(lines, &i, true);
+                cout << "VAL1: " << lines[i] << endl;
+                i++;
+                cout << "VAL2: " << lines[i] << endl;
+
+            break;
+
         }
 
-        i++;
+        i++; //nextLine
     }
 }
