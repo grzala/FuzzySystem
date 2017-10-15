@@ -14,6 +14,11 @@ FuzzySet::FuzzySet(string name, float a, float b, float alpha, float beta)
     init(name, a, b, alpha, beta);
 }
 
+FuzzySet::FuzzySet()
+{
+    init("", 0.f, 0.f, 0.f, 0.f);
+}
+
 FuzzySet::FuzzySet(string values)
 {
     //intepret string into fuzzyset
@@ -51,4 +56,15 @@ string FuzzySet::toString()
     str << "beta: " << beta << endl;
 
     return str.str();
+}
+
+
+bool FuzzySet::operator <(const FuzzySet &other) const
+{
+    return this->b < other.a;
+}
+
+bool FuzzySet::operator >(const FuzzySet &other) const
+{
+    return this->a > other.b;
 }

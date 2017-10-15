@@ -209,6 +209,16 @@ void Settings::readSettingsFromString(string sets)
 
     cout << "Settings parsed. Applying settings..." << endl;
 
-    FuzzySet f("bad 50 20 10 20");
-    cout << f.toString() << endl;
+    cout << "Applying crisp input settings..." << endl;
+    for (unsigned int i = 0; i < inputNames.size(); i++)
+    {
+        array<FuzzySet, 3> sets;
+        for (unsigned int j = 0; j < inputs[i].size(); j++)
+        {
+            FuzzySet f(inputs[i][j]);
+            sets[j] = f;
+        }
+        Crisp c(inputNames[i], sets);
+        cout << c.toString() << endl;
+    }
 }

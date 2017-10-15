@@ -6,7 +6,9 @@
 #include <stdexcept>
 #include <sstream>
 #include <vector>
+#include <array>
 
+#include "Crisp.h"
 #include "FuzzySet.h"
 
 using namespace std;

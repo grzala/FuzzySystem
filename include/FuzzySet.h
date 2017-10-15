@@ -15,6 +15,7 @@ class FuzzySet
     public:
         FuzzySet(string name, float a, float b, float alpha, float beta);
         FuzzySet(string values);
+        FuzzySet();
 
         string Getname() {return name;}
         float Geta() { return a; }
@@ -23,6 +24,9 @@ class FuzzySet
         float Getbeta() { return beta; }
 
         string toString();
+
+        bool operator <(const FuzzySet &other) const;
+        bool operator >(const FuzzySet &other) const;
 
     private:
         void init(string name, float a, float b, float alpha, float beta);
