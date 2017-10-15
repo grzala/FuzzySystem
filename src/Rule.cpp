@@ -7,8 +7,6 @@ Rule::Rule()
 
 Rule::Rule(string rule)
 {
-    cout << "TESTING REGEX" << endl << endl;
-
     string c_rule = rule;
     transform(rule.begin(), rule.end(), rule.begin(), ::tolower);
     //rule.erase(std::remove(rule.begin(), rule.end(), ' '), rule.end());
