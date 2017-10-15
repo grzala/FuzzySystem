@@ -28,6 +28,8 @@ Settings* Settings::instance()
 //init settings from file
 void Settings::readSettingsFromFile(string path)
 {
+    string content;
+
     try {
         //open file
         ifstream inFile;
@@ -40,18 +42,18 @@ void Settings::readSettingsFromFile(string path)
         //read file to string
         std::stringstream contentstream;
         contentstream << inFile.rdbuf();
-        string content = contentstream.str();
+        content = contentstream.str();
 
         //close file
         inFile.close();
-
-        //set settings
-        readSettingsFromString(content);
 
     } catch(const std::exception& e) {
         cout << "Settings not set, file " + path + " not found" << endl;
         return;
     }
+
+    //set settings
+    readSettingsFromString(content);
 }
 
 bool isWhiteSpaceString(string s)
@@ -207,4 +209,6 @@ void Settings::readSettingsFromString(string sets)
 
     cout << "Settings parsed. Applying settings..." << endl;
 
+    FuzzySet f("bad 50 20 10 20");
+    cout << f.toString() << endl;
 }

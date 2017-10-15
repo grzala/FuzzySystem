@@ -4,13 +4,25 @@
 	<stdexcept>
 	"Settings.h"
 
-1508072982 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
+1508080954 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
 	"Settings.h"
 
-1508028496 c:\users\grzala\desktop\fuzzy\include\settings.h
+1508079484 c:\users\grzala\desktop\fuzzy\include\settings.h
 	<iostream>
 	<fstream>
 	<stdexcept>
 	<sstream>
 	<vector>
+	"FuzzySet.h"
+
+1508080996 c:\users\grzala\desktop\fuzzy\include\fuzzyset.h
+	<iostream>
+	<string>
+	<sstream>
+	<algorithm>
+	<iterator>
+	<exception>
+
+1508080994 source:c:\users\grzala\desktop\fuzzy\src\fuzzyset.cpp
+	"FuzzySet.h"
 

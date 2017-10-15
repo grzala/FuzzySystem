@@ -7,6 +7,8 @@
 #include <sstream>
 #include <vector>
 
+#include "FuzzySet.h"
+
 using namespace std;
 
 class Settings
