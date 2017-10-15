@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1508092757 source:c:\users\grzala\desktop\fuzzy\main.cpp
+1508107117 source:c:\users\grzala\desktop\fuzzy\main.cpp
 	<iostream>
 	<stdexcept>
 	"Settings.h"
@@ -7,7 +7,7 @@
 1508091641 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
 	"Settings.h"
 
-1508089208 c:\users\grzala\desktop\fuzzy\include\settings.h
+1508107084 c:\users\grzala\desktop\fuzzy\include\settings.h
 	<iostream>
 	<fstream>
 	<stdexcept>
@@ -42,21 +42,22 @@
 	<exception>
 	"FuzzySet.h"
 
-1508090953 c:\users\grzala\desktop\fuzzy\include\rulebase.h
+1508107252 c:\users\grzala\desktop\fuzzy\include\rulebase.h
 	<string>
+	<sstream>
 	<vector>
 	"Rule.h"
 
 1508090940 source:c:\users\grzala\desktop\fuzzy\src\rulebase.cpp
 	"Rulebase.h"
 
-1508101015 c:\users\grzala\desktop\fuzzy\include\rule.h
+1508106864 c:\users\grzala\desktop\fuzzy\include\rule.h
 	<iostream>
 	<string>
 	<regex>
 	<algorithm>
 	<exception>
 
-1508106683 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
+1508107134 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 

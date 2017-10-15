@@ -7,6 +7,7 @@ Rule::Rule()
 
 Rule::Rule(string rule)
 {
+    this->rule_full = rule;
     string c_rule = rule;
     transform(rule.begin(), rule.end(), rule.begin(), ::tolower);
     //rule.erase(std::remove(rule.begin(), rule.end(), ' '), rule.end());
@@ -92,8 +93,6 @@ Rule::Rule(string rule)
     if (m.size() < 3) throw invalid_argument("Rule ill defined, something went wrong.");
     consequenceOutput = m[1];
     consequence = m[2];
-
-    cout << endl;
 }
 
 Rule::~Rule()

@@ -10,6 +10,7 @@ int main()
 
     s->readSettingsFromFile("example.txt");
 
+    std::cout << s->getRulebase().toString();
 
 
     return 0;

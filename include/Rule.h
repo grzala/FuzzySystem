@@ -23,7 +23,11 @@ class Rule
         Rule(string rule);
         virtual ~Rule();
 
+        string getRuleFull() { return rule_full; }
+
     private:
+        string rule_full;
+
         string antecedenceInput1;
         string antecedenceCondition1;
 

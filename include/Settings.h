@@ -30,6 +30,14 @@ class Settings
 
         bool isInitialized();
 
+        Rulebase getRulebase() {return rulebase;}
+
+        Crisp getCrispIn1() {return crispIn1;}
+        Crisp getCrispIn2() {return crispIn2;}
+        Crisp getCrispOut() {return crispOut;}
+
+        map<string, float> getValues() {return values;}
+
     private:
         static Settings *s_instance;
         bool initialized;
