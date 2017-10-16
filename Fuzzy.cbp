@@ -22,8 +22,19 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="example.txt" />
+		<Unit filename="example2.txt" />
+		<Unit filename="include/Crisp.h" />
+		<Unit filename="include/FuzzySet.h" />
+		<Unit filename="include/Fuzzyfier.h" />
+		<Unit filename="include/Rule.h" />
+		<Unit filename="include/Rulebase.h" />
 		<Unit filename="include/Settings.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Crisp.cpp" />
+		<Unit filename="src/FuzzySet.cpp" />
+		<Unit filename="src/Fuzzyfier.cpp" />
+		<Unit filename="src/Rule.cpp" />
+		<Unit filename="src/Rulebase.cpp" />
 		<Unit filename="src/Settings.cpp" />
 		<Extensions>
 			<code_completion />

@@ -36,7 +36,7 @@ class Settings
         Crisp getCrispIn2() {return crispIn2;}
         Crisp getCrispOut() {return crispOut;}
 
-        map<string, float> getValues() {return values;}
+        array<pair<string, float>, 2> getValues() {return values;}
 
     private:
         static Settings *s_instance;
@@ -48,7 +48,7 @@ class Settings
         Crisp crispIn2;
         Crisp crispOut;
 
-        map<string, float> values;
+        array<pair<string, float>, 2> values;
 
 };
 

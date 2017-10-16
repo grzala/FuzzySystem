@@ -254,7 +254,7 @@ void Settings::readSettingsFromString(string sets)
     cout << "Crisp settings applied." << endl;
 
     cout << "Applying values..." << endl;
-    map<string, float> vals;
+    vector<pair<string, float>> vals;
     try
     {
         for (unsigned int i = 0; i < values.size(); i++)
@@ -277,8 +277,8 @@ void Settings::readSettingsFromString(string sets)
             if (tokens.size() != 2) {
                 throw invalid_argument("Values did not follow convention: inputname = value");
             }
-
-            vals[tokens[0]] = stof(tokens[1]);
+            pair<string, float> p(tokens[0], stof(tokens[1]));
+            vals.push_back(p);
         }
     } catch (const exception& e)
     {
@@ -296,7 +296,8 @@ void Settings::readSettingsFromString(string sets)
     crispIn2 = crisps[1];
     crispOut = crisps[2];
 
-    this->values = vals;
+    this->values[0] = vals[0];
+    this->values[1] = vals[1];
 
     initialized = true;
     cout << "Settings applied successfully";

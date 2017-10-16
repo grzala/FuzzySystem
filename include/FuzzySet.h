@@ -28,6 +28,9 @@ class FuzzySet
         bool operator <(const FuzzySet &other) const;
         bool operator >(const FuzzySet &other) const;
 
+
+        float membership(float x);
+
     private:
         void init(string name, float a, float b, float alpha, float beta);
 

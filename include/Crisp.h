@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 #include <array>
+#include <map>
 #include <vector>
 #include <exception>
 
@@ -20,6 +21,9 @@ class Crisp
         string Getname() { return name; }
 
         string toString();
+
+        array<pair<string, float>, 3> calculateFuzzy(float val);
+
 
     protected:
 

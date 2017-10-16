@@ -88,8 +88,13 @@ Rule::Rule(string rule)
     string consequent = m[1];
 
     str = consequent;
-    r = regex("([A-z]+) will be ([A-z]+)");
+    r = regex("([A-z]+) is ([A-z]+)");
     regex_search(str, m, r);
+    if (m.size() < 3) {
+        r = regex("([A-z]+) will be ([A-z]+)");
+        regex_search(str, m, r);
+    }
+
     if (m.size() < 3) throw invalid_argument("Rule ill defined, something went wrong.");
     consequenceOutput = m[1];
     consequence = m[2];

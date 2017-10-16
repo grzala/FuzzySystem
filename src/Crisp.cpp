@@ -44,3 +44,15 @@ string Crisp::toString()
 
     return str.str();
 }
+
+
+array<pair<string, float>, 3> Crisp::calculateFuzzy(float val)
+{
+    array<pair<string, float>, 3> result;
+    for (unsigned int i = 0; i < sets.size(); i++)
+    {
+        FuzzySet s = sets[i];
+        result[i] = pair<string, float>(s.Getname(), s.membership(val));
+    }
+    return result;
+}
