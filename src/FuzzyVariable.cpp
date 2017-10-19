@@ -1,5 +1,7 @@
 #include "FuzzyVariable.h"
 
+using namespace fsm;
+
 FuzzyVariable::FuzzyVariable()
 {
     name = "";
@@ -29,13 +31,13 @@ string FuzzyVariable::toString()
 }
 
 
-array<pair<string, float>, 3> FuzzyVariable::calculateFuzzy(float val)
+fuzzy_values FuzzyVariable::calculateFuzzy(float val)
 {
-    array<pair<string, float>, 3> result;
+    vector<pair<string, float>> result;
     for (unsigned int i = 0; i < sets.size(); i++)
     {
         FuzzySet s = sets[i];
-        result[i] = pair<string, float>(s.Getname(), s.membership(val));
+        result.push_back(pair<string, float>(s.Getname(), s.membership(val)));
     }
     return result;
 }

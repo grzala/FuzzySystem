@@ -10,6 +10,8 @@
 
 using namespace std;
 
+namespace fsm {
+
 class FuzzySet
 {
     public:
@@ -40,5 +42,7 @@ class FuzzySet
         float alpha;
         float beta;
 };
+
+}
 
 #endif // FUZZYSET_H

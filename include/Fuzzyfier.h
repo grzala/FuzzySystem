@@ -8,23 +8,29 @@
 
 #include "FuzzyVariable.h"
 
-typedef int fuzzy_value;
+namespace fsm {
 
 class Fuzzyfier
 {
     public:
         Fuzzyfier();
 
-        void setCrispInput(FuzzyVariable* a, FuzzyVariable* b);
+        void setFuzzyInput(FuzzyVariable* a, FuzzyVariable* b);
+        void fuzzyfy(float val1, float val2);
+        array<fuzzy_values, 2> getResult() {return currentResult;}
+
 
 
     private:
 
-
         FuzzyVariable* fIn1;
         FuzzyVariable* fIn2;
 
+        array<fuzzy_values, 2> currentResult;
+
 
 };
+
+}
 
 #endif // FUZZYFIER_H

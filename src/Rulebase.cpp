@@ -1,5 +1,7 @@
 #include "Rulebase.h"
 
+using namespace fsm;
+
 Rulebase::Rulebase()
 {
     //ctor

@@ -10,6 +10,10 @@
 
 #include "FuzzySet.h"
 
+namespace fsm {
+
+typedef vector<pair<string, float>> fuzzy_values;
+
 class FuzzyVariable
 {
     public:
@@ -21,7 +25,7 @@ class FuzzyVariable
 
         string toString();
 
-        array<pair<string, float>, 3> calculateFuzzy(float val);
+        fuzzy_values calculateFuzzy(float val);
 
 
     protected:
@@ -30,5 +34,7 @@ class FuzzyVariable
         string name;
         vector <FuzzySet> sets;
 };
+
+}
 
 #endif // FUZZYVARIABLE_H

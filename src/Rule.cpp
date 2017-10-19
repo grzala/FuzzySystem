@@ -1,5 +1,7 @@
 #include "Rule.h"
 
+using namespace fsm;
+
 Rule::Rule()
 {
     //ctor

@@ -14,6 +14,8 @@ int main()
     FuzzySystem fs;
     fs.initSettingsFromFile("example.txt");
 
+    fs.run();
+
 
 
     return 0;

@@ -9,6 +9,8 @@
 
 using namespace std;
 
+namespace fsm {
+
 class Rulebase
 {
     public:
@@ -31,5 +33,7 @@ class Rulebase
         string name;
         vector<Rule> rules;
 };
+
+}
 
 #endif // RULEBASE_H

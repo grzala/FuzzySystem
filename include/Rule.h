@@ -11,6 +11,8 @@
 
 using namespace std;
 
+namespace fsm {
+
 enum SetOperation {
     AND,
     OR,
@@ -39,5 +41,7 @@ class Rule
         string consequenceOutput;
         string consequence;
 };
+
+}
 
 #endif // RULE_H

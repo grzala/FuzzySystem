@@ -21,9 +21,15 @@ class FuzzySystem
         void applySettings(Settings s);
         void initSettingsFromFile(string s) {initSettingsFromFile(s.c_str());}
         void initSettingsFromFile(const char* path);
+        void init();
 
         void applyValues(array<pair<string, float>, 2> vals) {applyValues(vals[0], vals[1]);}
         void applyValues(pair<string, float> a, pair<string, float> b);
+
+        void run();
+        void run(array<pair<string, float>, 2> vals) {run(vals[0], vals[1]);}
+        void run(pair<string, float> a, pair<string, float> b);
+        void run(float a, float b);
 
     private:
         Settings settings;

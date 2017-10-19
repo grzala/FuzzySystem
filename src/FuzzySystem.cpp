@@ -149,6 +149,13 @@ void FuzzySystem::applyValues(pair<string, float> a, pair<string, float> b)
     currentValue1 = v1;
     currentValue2 = v2;
 
+    init();
+}
+
+void FuzzySystem::init()
+{
+    fuzzyfier = Fuzzyfier();
+    fuzzyfier.setFuzzyInput(&fuzzyIn1, &fuzzyIn2);
 }
 
 void FuzzySystem::initSettingsFromFile(const char* path)
@@ -158,4 +165,48 @@ void FuzzySystem::initSettingsFromFile(const char* path)
     applySettings(s);
 }
 
+void FuzzySystem::run(pair<string, float> a, pair<string, float> b)
+{
+    try {
+        applyValues(a, b);
+    } catch (const exception& e) {
+        console_write("Cannot run fuzzy: Values incorrect.");
+        console_write(e.what());
+        return;
+    }
+
+    run();
+}
+
+void FuzzySystem::run(float a, float b)
+{
+    currentValue1 = a;
+    currentValue2 = b;
+    run();
+}
+
+void FuzzySystem::run()
+{
+    //fuzzyfy values
+    console_log("");
+    console_log("Fuzzyfying values");
+    fuzzyfier.fuzzyfy(currentValue1, currentValue2);
+    array<fuzzy_values, 2> fuzzyfied = fuzzyfier.getResult();
+    console_log("Values fuzzified");
+    //print for debug
+    if (get_log_level() == log_level::BUILD)
+    {
+        fuzzy_values fs0 = fuzzyfied[0]; fuzzy_values fs1 = fuzzyfied[1];
+        console_debug("Fuzzyfied value for: " + fuzzyIn1.getName());
+        for (unsigned int i = 0; i < fs0.size(); i++) {
+            console_debug(fs0[i].first + " " + to_string(fs0[i].second));
+        }
+        console_debug("");
+        console_debug("Fuzzyfied value for: " + fuzzyIn2.getName());
+        for (unsigned int i = 0; i < fs1.size(); i++) {
+            console_debug(fs1[i].first + " " + to_string(fs1[i].second));
+        }
+        console_debug("");
+    }
+}
 

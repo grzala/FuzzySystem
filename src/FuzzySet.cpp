@@ -1,5 +1,7 @@
 #include "FuzzySet.h"
 
+using namespace fsm;
+
 void FuzzySet::init(string name, float a, float b, float alpha, float beta)
 {
     this->name = name;

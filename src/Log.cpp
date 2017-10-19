@@ -8,6 +8,11 @@ void fsm::set_log_level(unsigned int i)
     level = i;
 }
 
+unsigned int fsm::get_log_level()
+{
+    return level;
+}
+
 void fsm::console_debug(string s)
 {
     if (level >= 2) cout << s << endl;

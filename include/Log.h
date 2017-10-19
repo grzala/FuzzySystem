@@ -21,6 +21,8 @@ enum log_level {
 
 void set_log_level(unsigned int i);
 
+unsigned int get_log_level();
+
 void console_debug(string s);
 void console_log(string s);
 void console_write(string s);
