@@ -61,7 +61,7 @@
 1508108551 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 
-1508454517 source:c:\users\grzala\onedrive\fuzzy\main.cpp
+1508454686 source:c:\users\grzala\onedrive\fuzzy\main.cpp
 	<iostream>
 	<exception>
 	"Log.h"
@@ -164,7 +164,7 @@
 	<iostream>
 	<string>
 
-1508433075 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
+1508454590 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
 	"Log.h"
 
 1508451658 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h

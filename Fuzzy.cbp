@@ -17,22 +17,49 @@
 					<Add directory="include" />
 				</Compiler>
 			</Target>
+			<Target title="Static">
+				<Option output="bin/Static/Fuzzy" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="example.txt" />
 		<Unit filename="example2.txt" />
-		<Unit filename="include/Crisp.h" />
+		<Unit filename="include/Defuzzyfier.h">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="include/FuzzySet.h" />
+		<Unit filename="include/FuzzySystem.h" />
+		<Unit filename="include/FuzzyVariable.h">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="include/Fuzzyfier.h" />
+		<Unit filename="include/InferenceEngine.h" />
+		<Unit filename="include/Log.h" />
 		<Unit filename="include/Rule.h" />
 		<Unit filename="include/Rulebase.h" />
 		<Unit filename="include/Settings.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/Crisp.cpp" />
+		<Unit filename="src/Defuzzyfier.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="src/FuzzySet.cpp" />
+		<Unit filename="src/FuzzySystem.cpp" />
+		<Unit filename="src/FuzzyVariable.cpp">
+			<Option target="Debug" />
+		</Unit>
 		<Unit filename="src/Fuzzyfier.cpp" />
+		<Unit filename="src/InferenceEngine.cpp" />
+		<Unit filename="src/Log.cpp" />
 		<Unit filename="src/Rule.cpp" />
 		<Unit filename="src/Rulebase.cpp" />
 		<Unit filename="src/Settings.cpp" />
