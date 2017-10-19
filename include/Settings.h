@@ -18,7 +18,7 @@ using namespace std;
 namespace fsm
 {
 
-typedef pair<string, vector<string>> crisp_pair;
+typedef pair<string, vector<string>> fuzzy_pair;
 
 struct Settings
 {
@@ -26,9 +26,9 @@ struct Settings
     vector<string>rules;
 
 
-    crisp_pair crisp_in_1;
-    crisp_pair crisp_in_2;
-    crisp_pair crisp_out;
+    fuzzy_pair fuzzy_in_1;
+    fuzzy_pair fuzzy_in_2;
+    fuzzy_pair fuzzy_out;
 
     string value1;
     string value2;

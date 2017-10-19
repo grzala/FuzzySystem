@@ -61,13 +61,12 @@
 1508108551 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 
-1508352555 source:c:\users\grzala\onedrive\fuzzy\main.cpp
+1508430310 source:c:\users\grzala\onedrive\fuzzy\main.cpp
 	<iostream>
-	<stdexcept>
 	"Log.h"
-	"Settings.h"
+	"FuzzySystem.h"
 
-1508425735 c:\users\grzala\onedrive\fuzzy\include\settings.h
+1508430489 c:\users\grzala\onedrive\fuzzy\include\settings.h
 	<iostream>
 	<string>
 	<vector>
@@ -90,7 +89,7 @@
 	<algorithm>
 	<exception>
 
-1508191456 c:\users\grzala\onedrive\fuzzy\include\crisp.h
+1508429962 c:\users\grzala\onedrive\fuzzy\include\crisp.h
 	<string>
 	<sstream>
 	<array>
@@ -119,23 +118,27 @@
 1508090940 source:c:\users\grzala\onedrive\fuzzy\src\rulebase.cpp
 	"Rulebase.h"
 
-1508426522 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
+1508430635 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
 	"Settings.h"
 
-1508192607 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
+1508430108 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
 	"Fuzzyfier.h"
 
-1508346913 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
+1508430102 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
 	<string>
 	<array>
 	<exception>
-	"Crisp.h"
+	"FuzzyVariable.h"
 
-1508346041 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1508430934 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
-1508346923 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+1508430156 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+	<exception>
 	"Settings.h"
+	"Rulebase.h"
+	"FuzzyVariable.h"
+	"Fuzzyfier.h"
 
 1508346383 source:c:\users\grzala\onedrive\fuzzy\src\settings2.cpp
 	"Settings2.h"
@@ -153,10 +156,22 @@
 	"Crisp.h"
 	"FuzzySet.h"
 
-1508352530 c:\users\grzala\onedrive\fuzzy\include\log.h
+1508428070 c:\users\grzala\onedrive\fuzzy\include\log.h
 	<iostream>
 	<string>
 
 1508352650 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
 	"Log.h"
+
+1508430823 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
+	<string>
+	<sstream>
+	<array>
+	<map>
+	<vector>
+	<exception>
+	"FuzzySet.h"
+
+1508430982 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
+	"FuzzyVariable.h"
 

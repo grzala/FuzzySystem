@@ -6,27 +6,23 @@
 
 #include <exception>
 
-#include "Crisp.h"
+#include "FuzzyVariable.h"
 
-typedef int fuzzyresults;
+typedef int fuzzy_value;
 
 class Fuzzyfier
 {
     public:
-        Fuzzyfier(Crisp a, Crisp b);
+        Fuzzyfier();
 
-        void setValues(array<pair<string, float>, 2> vals);
-        void fuzzify();
+        void setCrispInput(FuzzyVariable* a, FuzzyVariable* b);
+
 
     private:
 
-        bool vals_initialized;
 
-        Crisp cIn1;
-        Crisp cIn2;
-
-        pair <string, float> val1;
-        pair <string, float> val2;
+        FuzzyVariable* fIn1;
+        FuzzyVariable* fIn2;
 
 
 };

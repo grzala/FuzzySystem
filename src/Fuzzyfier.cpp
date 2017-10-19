@@ -1,23 +1,13 @@
 #include "Fuzzyfier.h"
 
-Fuzzyfier::Fuzzyfier(Crisp a, Crisp b)
+Fuzzyfier::Fuzzyfier()
 {
-    cIn1 = a; cIn2 = b;
-    vals_initialized = false;
+
 }
 
 
-void Fuzzyfier::setValues(array<pair<string, float>, 2> vals)
+void Fuzzyfier::setCrispInput(FuzzyVariable* a, FuzzyVariable* b)
 {
-    val1 = vals[0];
-    val2 = vals[1];
-    vals_initialized = true;
-}
-
-void Fuzzyfier::fuzzify()
-{
-    if (!vals_initialized)
-        throw runtime_error("Fuzzyfier not properly initialized");
-
-
+    fIn1 = a;
+    fIn2 = b;
 }

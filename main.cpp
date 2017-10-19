@@ -1,8 +1,7 @@
 #include <iostream>
-#include <stdexcept>
 
 #include "Log.h"
-#include "Settings.h"
+#include "FuzzySystem.h"
 
 //g++ min 4.9
 
@@ -12,8 +11,8 @@ int main()
 {
     set_log_level(log_level::BUILD);
 
-    Settings s;
-    init_settings_from_file(s, "example.txt");
+    FuzzySystem fs;
+    fs.initSettingsFromFile("example.txt");
 
 
 

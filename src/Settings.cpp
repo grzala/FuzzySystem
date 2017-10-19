@@ -110,21 +110,21 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
                 string inputName(lines[i]);
                 console_log("Crisp " + to_string(input_no) + ": " + inputName);
 
-                nextLine(lines, i, true); //go to values
-                vector<string> crispValues;
+                nextLine(lines, i, true); //go to tuples
+                vector<string> fuzzyTuples;
                 while (!isWhiteSpaceString(lines[i]))
                 {
                     console_log(lines[i]);
-                    crispValues.push_back(lines[i]);
+                    fuzzyTuples.push_back(lines[i]);
                     i++;
                 }
 
                 if (input_no == 0)
-                    s.crisp_in_1 = crisp_pair(inputName, crispValues);
+                    s.fuzzy_in_1 = fuzzy_pair(inputName, fuzzyTuples);
                 else if (input_no == 1)
-                    s.crisp_in_2 = crisp_pair(inputName, crispValues);
+                    s.fuzzy_in_2 = fuzzy_pair(inputName, fuzzyTuples);
                 else if (input_no == 2)
-                    s.crisp_out = crisp_pair(inputName, crispValues);
+                    s.fuzzy_out = fuzzy_pair(inputName, fuzzyTuples);
                 console_log("");
 
                 input_no++;
@@ -144,14 +144,14 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
                     s.value2 = lines[i];
                 } catch(std::exception& e) { //if no values are found, ask for manual input
                     cout << "No values were given or incorrectly defined. You can input them manually:" << endl;
-                    string name1(s.crisp_in_1.first);
+                    string name1(s.fuzzy_in_1.first);
                     cout << name1 << " = ";
                     string in;
                     cin >> in;
                     in = name1.append(" = " + in);
                     s.value1 = in;
 
-                    string name2(s.crisp_in_2.first);
+                    string name2(s.fuzzy_in_2.first);
                     cout << name2 << " = ";
                     cin >> in;
                     in = name2.append(" = " + in);
@@ -167,6 +167,8 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
 
         }
     }
+
+    console_log("Settings loaded");
 
     return 1;
 }

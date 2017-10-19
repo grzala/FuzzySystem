@@ -16,6 +16,7 @@ enum log_level {
     BUILD = 2,
     VERBOSE = 1,
     NORMAL = 0,
+    SILENT = -1,
 };
 
 void set_log_level(unsigned int i);
