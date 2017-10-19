@@ -1,6 +1,6 @@
 thermostat rulebase
 
-Rule1: If temperature is high or current is high then change_in_current is reduce
+Rule1: If temperature is high or current is high then change_in_current is decrease
 Rule2: If temperature is medium then change_in_current is no_change
 Rule3: If temperature is low and current is high then change_in_current is no_change
 Rule4: If temperature is low and current is low then change_in_current is increase
@@ -24,4 +24,4 @@ no_change 0 0 50 50
 increase 50 50 50 50
 
 temperature = 300
-current = 17
+current = 16

@@ -91,3 +91,16 @@ float FuzzySet::membership(float x)
         return 0.f;
     }
 }
+
+array<float, 2> FuzzySet::invert_membership(float y)
+{
+    array<float, 2> result;
+
+    if (y > 1.f || y < 0.f)
+        throw invalid_argument("y must be between 0 and 1");
+
+    result[0] = (y*alpha) - (-a + alpha);
+    result[1] = -(y*beta) + (b + beta);
+
+    return result;
+}

@@ -8,7 +8,7 @@ Fuzzyfier::Fuzzyfier()
 }
 
 
-void Fuzzyfier::setFuzzyInput(FuzzyVariable* a, FuzzyVariable* b)
+void Fuzzyfier::setCrispInput(FuzzyVariable* a, FuzzyVariable* b)
 {
     fIn1 = a;
     fIn2 = b;

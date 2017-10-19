@@ -99,10 +99,11 @@
 	<exception>
 	"FuzzySet.h"
 
-1508431686 c:\users\grzala\onedrive\fuzzy\include\fuzzyset.h
+1508452592 c:\users\grzala\onedrive\fuzzy\include\fuzzyset.h
 	<iostream>
 	<string>
 	<sstream>
+	<array>
 	<algorithm>
 	<iterator>
 	<exception>
@@ -110,7 +111,7 @@
 1508192024 source:c:\users\grzala\onedrive\fuzzy\src\crisp.cpp
 	"Crisp.h"
 
-1508444618 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyset.cpp
+1508453663 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyset.cpp
 	"FuzzySet.h"
 
 1508435221 source:c:\users\grzala\onedrive\fuzzy\src\rule.cpp
@@ -122,25 +123,26 @@
 1508430635 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
 	"Settings.h"
 
-1508432943 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
+1508448118 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
 	"Fuzzyfier.h"
 
-1508432925 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
+1508448110 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
 	<string>
 	<array>
 	<exception>
 	"FuzzyVariable.h"
 
-1508447543 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1508448676 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
-1508436523 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+1508448532 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
 	<exception>
 	"Settings.h"
 	"Rulebase.h"
 	"FuzzyVariable.h"
 	"Fuzzyfier.h"
 	"InferenceEngine.h"
+	"Defuzzyfier.h"
 
 1508346383 source:c:\users\grzala\onedrive\fuzzy\src\settings2.cpp
 	"Settings2.h"
@@ -165,7 +167,7 @@
 1508433075 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
 	"Log.h"
 
-1508444682 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
+1508451658 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
 	<string>
 	<sstream>
 	<array>
@@ -174,7 +176,7 @@
 	<exception>
 	"FuzzySet.h"
 
-1508444937 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
+1508450091 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
 	"FuzzyVariable.h"
 
 1508447518 c:\users\grzala\onedrive\fuzzy\include\inferenceengine.h
@@ -188,4 +190,18 @@
 
 1508447501 source:c:\users\grzala\onedrive\fuzzy\src\inferenceengine.cpp
 	"InferenceEngine.h"
+
+1508448326 source:c:\users\grzala\onedrive\fuzzy\src\deffuzyfier.cpp
+	"Deffuzyfier.h"
+
+1508448265 c:\users\grzala\onedrive\fuzzy\include\deffuzyfier.h
+	"FuzzyVariable.h"
+
+1508451197 c:\users\grzala\onedrive\fuzzy\include\defuzzyfier.h
+	<exception>
+	"Log.h"
+	"FuzzyVariable.h"
+
+1508453809 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
+	"Defuzzyfier.h"
 

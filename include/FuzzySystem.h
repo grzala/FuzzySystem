@@ -9,11 +9,19 @@
 
 #include "Fuzzyfier.h"
 #include "InferenceEngine.h"
+#include "Defuzzyfier.h"
 
 //Fuzzy system contains the knowledge base
 
 namespace fsm
 {
+
+struct KnowledgeBase {
+    Rulebase rb;
+    FuzzyVariable fuzzyIn1;
+    FuzzyVariable fuzzyIn2;
+    FuzzyVariable fuzzyOut;
+};
 
 class FuzzySystem
 {
@@ -39,11 +47,7 @@ class FuzzySystem
 
         //Knowledge Base/////////
         Settings settings;
-
-        Rulebase rb;
-        FuzzyVariable fuzzyIn1;
-        FuzzyVariable fuzzyIn2;
-        FuzzyVariable fuzzyOut;
+        KnowledgeBase k;
 
         float currentValue1 = 0.f;
         float currentValue2 = 0.f;
@@ -51,6 +55,7 @@ class FuzzySystem
 
         Fuzzyfier fuzzyfier;
         InferenceEngine engine;
+        Defuzzyfier defuzzyfier;
 };
 
 }

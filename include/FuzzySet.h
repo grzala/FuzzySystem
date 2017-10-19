@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+
+#include <array>
 #include <algorithm>
 #include <iterator>
 #include <exception>
@@ -20,10 +22,10 @@ class FuzzySet
         FuzzySet();
 
         string Getname() {return name;}
-        float Geta() { return a; }
-        float Getb() { return b; }
-        float Getalpha() { return alpha; }
-        float Getbeta() { return beta; }
+        float getA() { return a; }
+        float getB() { return b; }
+        float getAlpha() { return alpha; }
+        float getBeta() { return beta; }
 
         string toString();
 
@@ -32,6 +34,7 @@ class FuzzySet
 
 
         float membership(float x);
+        array<float, 2> invert_membership(float y);
 
     private:
         void init(string name, float a, float b, float alpha, float beta);

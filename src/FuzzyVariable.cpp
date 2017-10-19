@@ -41,3 +41,12 @@ fuzzy_values FuzzyVariable::calculateFuzzy(float val)
     }
     return result;
 }
+
+FuzzySet* FuzzyVariable::getSetByName(string name)
+{
+    for (unsigned int i = 0; i < sets.size(); i++)
+    {
+        if (sets[i].Getname() == name) return &sets[i];
+    }
+    return nullptr;
+}
