@@ -2,55 +2,40 @@
 #define SETTINGS_H
 
 #include <iostream>
-#include <fstream>
-#include <stdexcept>
-#include <sstream>
+
+#include <string>
 #include <vector>
 #include <array>
-#include <map>
-#include <algorithm>
 
-#include "Rulebase.h"
-#include "Crisp.h"
-#include "FuzzySet.h"
+#include <fstream>
+#include <sstream>
+#include <istream>
 
+#include "Log.h"
 
 using namespace std;
 
-class Settings
+namespace fsm
 {
-    public:
-        Settings();
-        ~Settings();
 
-        static Settings *instance();
+typedef pair<string, vector<string>> crisp_pair;
 
-        void readSettingsFromFile(string path);
-        void readSettingsFromString(string sets);
+struct Settings
+{
+    string rulebaseName;
+    vector<string>rules;
 
-        bool isInitialized();
 
-        Rulebase getRulebase() {return rulebase;}
+    crisp_pair crisp_in_1;
+    crisp_pair crisp_in_2;
+    crisp_pair crisp_out;
 
-        Crisp getCrispIn1() {return crispIn1;}
-        Crisp getCrispIn2() {return crispIn2;}
-        Crisp getCrispOut() {return crispOut;}
-
-        array<pair<string, float>, 2> getValues() {return values;}
-
-    private:
-        static Settings *s_instance;
-        bool initialized;
-
-        Rulebase rulebase;
-
-        Crisp crispIn1;
-        Crisp crispIn2;
-        Crisp crispOut;
-
-        array<pair<string, float>, 2> values;
-
+    string value1;
+    string value2;
 };
 
+extern int init_settings_from_file(Settings& s, const char* path);
 
+
+}
 #endif // SETTINGS_H

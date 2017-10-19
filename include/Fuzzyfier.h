@@ -8,7 +8,7 @@
 
 #include "Crisp.h"
 
-pair <string, <array <pair <string, float>, 3> > > fuzzyresults;
+typedef int fuzzyresults;
 
 class Fuzzyfier
 {

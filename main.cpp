@@ -1,27 +1,21 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "Log.h"
 #include "Settings.h"
-#include "Fuzzyfier.h"
 
 //g++ min 4.9
+
+using namespace fsm;
+
 int main()
 {
-    Settings* s = Settings::instance();
+    set_log_level(log_level::BUILD);
 
-    s->readSettingsFromFile("example.txt");
-
-    std::cout << s->getRulebase().toString() << std::endl;
-
-
-    Fuzzyfier *f = new Fuzzyfier(s->getCrispIn1(), s->getCrispIn2());
-    f->setValues(s->getValues());
-
-    f->fuzzify();
+    Settings s;
+    init_settings_from_file(s, "example.txt");
 
 
-
-    delete f, s;
 
     return 0;
 }

@@ -1,61 +1,23 @@
 #include "Settings.h"
 
-//Settings is a singleton available anywhere in the program
-
-Settings* Settings::s_instance = nullptr;
-
-Settings::Settings()
+int read_from_file(string& content, const char* path)
 {
-    initialized = false;
-}
+    //open file
+    ifstream inFile;
+    inFile.open(path);
 
-Settings::~Settings() {
+    //if file does not exists, report exception
+    if (!inFile)
+        return 0;
 
-}
+    //read file to string
+    std::stringstream contentstream;
+    contentstream << inFile.rdbuf();
+    content = contentstream.str();
 
-bool Settings::isInitialized()
-{
-    return initialized;
-}
-
-Settings* Settings::instance()
-{
-    if (!s_instance)
-        s_instance = new Settings();
-    return s_instance;
-}
-
-//init settings from file
-void Settings::readSettingsFromFile(string path)
-{
-    string content;
-
-    try
-    {
-        //open file
-        ifstream inFile;
-        inFile.open(path);
-
-        //if file does not exists, report exception
-        if (!inFile)
-            throw runtime_error("Settings file not found, settings remain unchanged");
-
-        //read file to string
-        std::stringstream contentstream;
-        contentstream << inFile.rdbuf();
-        content = contentstream.str();
-
-        //close file
-        inFile.close();
-
-    } catch(const std::exception& e)
-    {
-        cout << "Settings not set, file " + path + " not found" << endl;
-        return;
-    }
-
-    //set settings
-    readSettingsFromString(content);
+    //close file
+    inFile.close();
+    return 1;
 }
 
 bool isWhiteSpaceString(string s)
@@ -63,27 +25,36 @@ bool isWhiteSpaceString(string s)
     return (s.find_first_not_of(" \t\n\v\f\r") == string::npos);
 }
 
-//find next empty or non empty line (omit current line)
-void nextLine(vector<string> lines, unsigned int* i, bool find_non_empty = false)
+//find next empty or non empty line (ignore current line)
+void nextLine(vector<string> lines, unsigned int& i, bool find_non_empty = false)
 {
-    while (isWhiteSpaceString(lines[*i]) == find_non_empty) //move to next non empty line
+    do //move to next non empty line
     {
-        (*i)++;
-        if (*i == lines.size()) //end of vector reached
+        i++;
+        if (i == lines.size()) //end of vector reached
         {
-            (*i) --; //leave counter at last line to prevent out of bounds exception
+            i--; //leave counter at last line to prevent out of bounds exception
+            i--; //leave counter at last line to prevent out of bounds exception
             string err = "Runtime Exception: End of file reached, no ";
             err.append((find_non_empty) ? "non-empty" : "empty");
-            err.append(" lines found\n");
+            err.append(" lines found");
             throw runtime_error(err);
         }
-    }
+    } while (isWhiteSpaceString(lines[i]) == find_non_empty);
 }
 
-void Settings::readSettingsFromString(string sets)
+int fsm::init_settings_from_file(Settings& s, const char* path)
 {
+    //read content to string
+    string content;
+    if (!read_from_file(content, path))
+    {
+        console_write("File not found. Settings not changed.");
+        return 0;
+    }
+
     //interpret string line by line
-    istringstream iss(sets);
+    istringstream iss(content);
     vector<string> lines;
 
     for (string line; getline(iss, line);)
@@ -91,6 +62,123 @@ void Settings::readSettingsFromString(string sets)
         if (line.size() == 0 || (line.size() > 1 && line.at(0) != '#')) //ignore comments
             lines.push_back(line);
     }
+
+    //interpret
+    enum readState {
+        RULEBASE,
+        INPUT,
+        VALUES,
+        FINISHED,
+    };
+
+    readState state = RULEBASE;
+
+    unsigned int i = 0;
+    unsigned int input_no = 0;
+    const unsigned int input_total = 3;
+
+    console_log("Parsing file...");
+    while (state != FINISHED) {
+
+        switch(state)
+        {
+        case RULEBASE:
+                console_log("Parsing rulebase...");
+                //get first non-empty
+                if (isWhiteSpaceString(lines[i])) nextLine(lines, i, true);
+                s.rulebaseName = lines[i];
+                console_log("Rulebase Name: " + s.rulebaseName);
+                nextLine(lines, i, true); //go to rules
+
+                console_log("Rules:");
+                while (!isWhiteSpaceString(lines[i]))
+                {
+                    console_log(lines[i]);
+                    s.rules.push_back(lines[i]);
+                    i++;
+                }
+                console_log("");
+
+                state = INPUT;
+            break;
+
+        case INPUT:
+            {
+                //get first non empty
+                console_log("Parsing crisp...");
+                nextLine(lines, i, true);
+                string inputName(lines[i]);
+                console_log("Crisp " + to_string(input_no) + ": " + inputName);
+
+                nextLine(lines, i, true); //go to values
+                vector<string> crispValues;
+                while (!isWhiteSpaceString(lines[i]))
+                {
+                    console_log(lines[i]);
+                    crispValues.push_back(lines[i]);
+                    i++;
+                }
+
+                if (input_no == 0)
+                    s.crisp_in_1 = crisp_pair(inputName, crispValues);
+                else if (input_no == 1)
+                    s.crisp_in_2 = crisp_pair(inputName, crispValues);
+                else if (input_no == 2)
+                    s.crisp_out = crisp_pair(inputName, crispValues);
+                console_log("");
+
+                input_no++;
+                if (input_no == input_total)
+                    state = VALUES;
+            }
+            break;
+
+        case VALUES:
+                console_log("Parsing values...");
+                try { //if values are given in the end of file
+                    nextLine(lines, i, true);
+                    console_log("value 1: " + lines[i]);
+                    s.value1 = lines[i];
+                    i++;
+                    console_log("value 2: " + lines[i]);
+                    s.value2 = lines[i];
+                } catch(std::exception& e) { //if no values are found, ask for manual input
+                    cout << "No values were given or incorrectly defined. You can input them manually:" << endl;
+                    string name1(s.crisp_in_1.first);
+                    cout << name1 << " = ";
+                    string in;
+                    cin >> in;
+                    in = name1.append(" = " + in);
+                    s.value1 = in;
+
+                    string name2(s.crisp_in_2.first);
+                    cout << name2 << " = ";
+                    cin >> in;
+                    in = name2.append(" = " + in);
+                    s.value2 = in;
+                }
+
+                state = FINISHED;
+
+            break;
+
+        case FINISHED:
+            break;
+
+        }
+    }
+
+    return 1;
+}
+
+
+/*
+
+
+
+void Settings::readSettingsFromString(string sets)
+{
+
 
     enum readState {
         RULEBASE,
@@ -212,93 +300,4 @@ void Settings::readSettingsFromString(string sets)
     }
     cout << endl << "Settings parsed. Applying settings..." << endl;
 
-    //settings parsed.
-    //now apply settings.
-    //do not changed settings until everything is properly initialized
-    cout << "Applying rulebase..." << endl;
-    Rulebase* rb;
-    try
-    {
-        rb = new Rulebase(rulebaseName, rules);
-    } catch (const exception& e)
-    {
-        cout << "Failed to apply rulebase." << endl;
-        cout << e.what() << endl;
-        cout << "Settings not applied." << endl;
-        return;
-    }
-    cout << "Rulebase applied." << endl;
-
-    cout << "Applying crisp input settings..." << endl;
-    array<Crisp, 3> crisps;
-    try
-    {
-        for (unsigned int i = 0; i < inputNames.size(); i++)
-        {
-            array<FuzzySet, 3> sets;
-            for (unsigned int j = 0; j < inputs[i].size(); j++)
-            {
-                FuzzySet f(inputs[i][j]);
-                sets[j] = f;
-            }
-            Crisp c(inputNames[i], sets);
-            crisps[i] = c;
-        }
-    } catch (const exception& e)
-    {
-        cout << "Error while applying crisp input settings." << endl;
-        cout << e.what() << endl;
-        cout << "Settings remain unchanged." << endl;
-        return;
-    }
-    cout << "Crisp settings applied." << endl;
-
-    cout << "Applying values..." << endl;
-    vector<pair<string, float>> vals;
-    try
-    {
-        for (unsigned int i = 0; i < values.size(); i++)
-        {
-            //remove spaces
-            string curval = values[i];
-            curval.erase(std::remove(curval.begin(), curval.end(), ' '), curval.end());
-
-            vector<string> tokens;
-            const char *str = curval.c_str();
-            char c = '='; //split by =
-            do
-            {
-                const char *begin = str;
-                while(*str != c && *str)
-                str++;
-                tokens.push_back(string(begin, str));
-            } while (0 != *str++);
-
-            if (tokens.size() != 2) {
-                throw invalid_argument("Values did not follow convention: inputname = value");
-            }
-            pair<string, float> p(tokens[0], stof(tokens[1]));
-            vals.push_back(p);
-        }
-    } catch (const exception& e)
-    {
-        cout << "Error parsing values. Values must be written as: inputname = value" << endl;
-        cout << e.what() << endl;
-        cout << "Settings were not applied." << endl;
-        return;
-    }
-    cout << "Values applied" << endl;
-
-    //permanent set settings
-    rulebase = *rb;
-
-    crispIn1 = crisps[0];
-    crispIn2 = crisps[1];
-    crispOut = crisps[2];
-
-    this->values[0] = vals[0];
-    this->values[1] = vals[1];
-
-    initialized = true;
-    cout << "Settings applied successfully";
-}
+*/
