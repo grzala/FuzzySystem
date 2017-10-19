@@ -34,29 +34,23 @@
 		</Compiler>
 		<Unit filename="example.txt" />
 		<Unit filename="example2.txt" />
-		<Unit filename="include/Defuzzyfier.h">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="include/Defuzzyfier.h" />
 		<Unit filename="include/FuzzySet.h" />
 		<Unit filename="include/FuzzySystem.h" />
-		<Unit filename="include/FuzzyVariable.h">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="include/FuzzyVariable.h" />
 		<Unit filename="include/Fuzzyfier.h" />
 		<Unit filename="include/InferenceEngine.h" />
 		<Unit filename="include/Log.h" />
 		<Unit filename="include/Rule.h" />
 		<Unit filename="include/Rulebase.h" />
 		<Unit filename="include/Settings.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="src/Defuzzyfier.cpp">
+		<Unit filename="main.cpp">
 			<Option target="Debug" />
 		</Unit>
+		<Unit filename="src/Defuzzyfier.cpp" />
 		<Unit filename="src/FuzzySet.cpp" />
 		<Unit filename="src/FuzzySystem.cpp" />
-		<Unit filename="src/FuzzyVariable.cpp">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="src/FuzzyVariable.cpp" />
 		<Unit filename="src/Fuzzyfier.cpp" />
 		<Unit filename="src/InferenceEngine.cpp" />
 		<Unit filename="src/Log.cpp" />
