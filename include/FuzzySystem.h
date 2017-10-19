@@ -42,6 +42,9 @@ class FuzzySystem
         void run(pair<string, float> a, pair<string, float> b);
         void run(float a, float b);
 
+        float getResult() {return currentResult;}
+        void printResult();
+
     private:
         bool initialized = false;
 
@@ -51,6 +54,7 @@ class FuzzySystem
 
         float currentValue1 = 0.f;
         float currentValue2 = 0.f;
+        float currentResult = 0.f;
         //////////////////////////
 
         Fuzzyfier fuzzyfier;

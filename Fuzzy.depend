@@ -61,7 +61,7 @@
 1508108551 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 
-1508434033 source:c:\users\grzala\onedrive\fuzzy\main.cpp
+1508454517 source:c:\users\grzala\onedrive\fuzzy\main.cpp
 	<iostream>
 	<exception>
 	"Log.h"
@@ -132,10 +132,10 @@
 	<exception>
 	"FuzzyVariable.h"
 
-1508448676 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1508454488 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
-1508448532 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+1508454410 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
 	<exception>
 	"Settings.h"
 	"Rulebase.h"
@@ -160,7 +160,7 @@
 	"Crisp.h"
 	"FuzzySet.h"
 
-1508433059 c:\users\grzala\onedrive\fuzzy\include\log.h
+1508454584 c:\users\grzala\onedrive\fuzzy\include\log.h
 	<iostream>
 	<string>
 
@@ -202,6 +202,6 @@
 	"Log.h"
 	"FuzzyVariable.h"
 
-1508453809 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
+1508454242 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
 	"Defuzzyfier.h"
 

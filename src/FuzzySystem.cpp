@@ -231,6 +231,11 @@ void FuzzySystem::run()
 
     //defuzzyfy
     defuzzyfier.defuzzyfy(fuzzy_output);
+    currentResult = defuzzyfier.getResult();
+}
 
+void FuzzySystem::printResult()
+{
+    cout << k.fuzzyOut.getName() + " is " + to_string(currentResult) << endl;
 }
 

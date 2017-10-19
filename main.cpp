@@ -10,13 +10,14 @@ using namespace fsm;
 
 int main()
 {
-    set_log_level(log_level::BUILD);
+    set_log_level(log_level::SILENT);
 
     FuzzySystem fs;
     fs.initSettingsFromFile("example2.txt");
 
     try {
         fs.run();
+        fs.printResult();
     } catch (const exception& e) {
         cout << e.what() << endl;
     }

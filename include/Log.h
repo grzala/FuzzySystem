@@ -13,10 +13,10 @@ namespace fsm
 //log in verbose
 //write always
 enum log_level {
-    BUILD = 2,
-    VERBOSE = 1,
-    NORMAL = 0,
-    SILENT = -1,
+    BUILD = 3,
+    VERBOSE = 2,
+    NORMAL = 1,
+    SILENT = 0,
 };
 
 void set_log_level(unsigned int i);
