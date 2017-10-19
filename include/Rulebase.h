@@ -29,6 +29,8 @@ class Rulebase
             return ss.str();
         }
 
+        vector<Rule> getRules() {return rules;}
+
     private:
         string name;
         vector<Rule> rules;

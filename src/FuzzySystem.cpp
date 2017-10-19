@@ -157,6 +157,9 @@ void FuzzySystem::init()
     fuzzyfier = Fuzzyfier();
     fuzzyfier.setFuzzyInput(&fuzzyIn1, &fuzzyIn2);
 
+    engine = InferenceEngine();
+    engine.setRulebase(&rb);
+
     initialized = true;
 }
 
@@ -203,15 +206,25 @@ void FuzzySystem::run()
     {
         fuzzy_values fs0 = fuzzyfied[0]; fuzzy_values fs1 = fuzzyfied[1];
         console_debug("Fuzzyfied value for: " + fuzzyIn1.getName());
-        for (unsigned int i = 0; i < fs0.size(); i++) {
-            console_debug(fs0[i].first + " " + to_string(fs0[i].second));
+        for (auto const& fuzzy_value : fs0) {
+            console_debug(fuzzy_value.first + " " + to_string(fuzzy_value.second));
         }
         console_debug("");
         console_debug("Fuzzyfied value for: " + fuzzyIn2.getName());
-        for (unsigned int i = 0; i < fs1.size(); i++) {
-            console_debug(fs1[i].first + " " + to_string(fs1[i].second));
+        for (auto const& fuzzy_value : fs1) {
+            console_debug(fuzzy_value.first + " " + to_string(fuzzy_value.second));
         }
         console_debug("");
     }
+
+    //infer
+    console_log("Start Inference engine");
+    fuzzy_engine_input engine_in;
+    engine_in[0] = pair<string, fuzzy_values>(fuzzyIn1.getName(), fuzzyfied[0]);
+    engine_in[1] = pair<string, fuzzy_values>(fuzzyIn2.getName(), fuzzyfied[1]);
+    engine.infer(engine_in);
+
+    fuzzy_engine_output fuzzy_output = engine.getResult();
+
 }
 

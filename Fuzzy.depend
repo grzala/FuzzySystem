@@ -77,13 +77,13 @@
 	<istream>
 	"Log.h"
 
-1508431710 c:\users\grzala\onedrive\fuzzy\include\rulebase.h
+1508436422 c:\users\grzala\onedrive\fuzzy\include\rulebase.h
 	<string>
 	<sstream>
 	<vector>
 	"Rule.h"
 
-1508434993 c:\users\grzala\onedrive\fuzzy\include\rule.h
+1508445450 c:\users\grzala\onedrive\fuzzy\include\rule.h
 	<iostream>
 	<string>
 	<regex>
@@ -110,10 +110,10 @@
 1508192024 source:c:\users\grzala\onedrive\fuzzy\src\crisp.cpp
 	"Crisp.h"
 
-1508431663 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyset.cpp
+1508444618 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyset.cpp
 	"FuzzySet.h"
 
-1508434092 source:c:\users\grzala\onedrive\fuzzy\src\rule.cpp
+1508435221 source:c:\users\grzala\onedrive\fuzzy\src\rule.cpp
 	"Rule.h"
 
 1508431627 source:c:\users\grzala\onedrive\fuzzy\src\rulebase.cpp
@@ -131,15 +131,16 @@
 	<exception>
 	"FuzzyVariable.h"
 
-1508433978 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1508447543 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
-1508433939 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+1508436523 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
 	<exception>
 	"Settings.h"
 	"Rulebase.h"
 	"FuzzyVariable.h"
 	"Fuzzyfier.h"
+	"InferenceEngine.h"
 
 1508346383 source:c:\users\grzala\onedrive\fuzzy\src\settings2.cpp
 	"Settings2.h"
@@ -164,7 +165,7 @@
 1508433075 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
 	"Log.h"
 
-1508431905 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
+1508444682 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
 	<string>
 	<sstream>
 	<array>
@@ -173,6 +174,18 @@
 	<exception>
 	"FuzzySet.h"
 
-1508431913 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
+1508444937 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
 	"FuzzyVariable.h"
+
+1508447518 c:\users\grzala\onedrive\fuzzy\include\inferenceengine.h
+	<string>
+	<array>
+	<map>
+	<algorithm>
+	"Rulebase.h"
+	"FuzzyVariable.h"
+	"Log.h"
+
+1508447501 source:c:\users\grzala\onedrive\fuzzy\src\inferenceengine.cpp
+	"InferenceEngine.h"
 

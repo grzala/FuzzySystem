@@ -12,7 +12,7 @@
 
 namespace fsm {
 
-typedef vector<pair<string, float>> fuzzy_values;
+typedef map<string, float> fuzzy_values;
 
 class FuzzyVariable
 {

@@ -8,6 +8,9 @@
 #include "FuzzyVariable.h"
 
 #include "Fuzzyfier.h"
+#include "InferenceEngine.h"
+
+//Fuzzy system contains the knowledge base
 
 namespace fsm
 {
@@ -34,6 +37,7 @@ class FuzzySystem
     private:
         bool initialized = false;
 
+        //Knowledge Base/////////
         Settings settings;
 
         Rulebase rb;
@@ -43,8 +47,10 @@ class FuzzySystem
 
         float currentValue1 = 0.f;
         float currentValue2 = 0.f;
+        //////////////////////////
 
         Fuzzyfier fuzzyfier;
+        InferenceEngine engine;
 };
 
 }

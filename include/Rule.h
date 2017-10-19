@@ -26,6 +26,15 @@ class Rule
         virtual ~Rule();
 
         string getRuleFull() { return rule_full; }
+        bool isTwoPart() { return two_part; }
+
+        string getAntecedenceInput1() { return antecedenceInput1; }
+        string getAntecedenceCondition1() { return antecedenceCondition1; }
+        SetOperation getOperation() { return operation; }
+        string getAntecedenceInput2() { return antecedenceInput2; }
+        string getAntecedenceCondition2() { return antecedenceCondition2; }
+        string getConsequenceOutput() { return consequenceOutput; }
+        string getConsequence() { return consequence; }
 
     private:
         string rule_full;

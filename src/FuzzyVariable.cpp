@@ -33,11 +33,11 @@ string FuzzyVariable::toString()
 
 fuzzy_values FuzzyVariable::calculateFuzzy(float val)
 {
-    vector<pair<string, float>> result;
+    map<string, float> result;
     for (unsigned int i = 0; i < sets.size(); i++)
     {
         FuzzySet s = sets[i];
-        result.push_back(pair<string, float>(s.Getname(), s.membership(val)));
+        result[s.Getname()] = s.membership(val);
     }
     return result;
 }

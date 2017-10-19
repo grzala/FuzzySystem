@@ -76,7 +76,7 @@ float FuzzySet::membership(float x)
 {
     if (x > a - alpha && x < a)
     {
-        return (x - (a + alpha))/alpha;
+        return (x + (-a + alpha))/alpha;
     }
     else if (x >= a && x <= b)
     {
