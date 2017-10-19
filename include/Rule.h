@@ -29,6 +29,7 @@ class Rule
 
     private:
         string rule_full;
+        bool two_part;
 
         string antecedenceInput1;
         string antecedenceCondition1;

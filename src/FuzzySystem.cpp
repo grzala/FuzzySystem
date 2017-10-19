@@ -156,6 +156,8 @@ void FuzzySystem::init()
 {
     fuzzyfier = Fuzzyfier();
     fuzzyfier.setFuzzyInput(&fuzzyIn1, &fuzzyIn2);
+
+    initialized = true;
 }
 
 void FuzzySystem::initSettingsFromFile(const char* path)
@@ -187,6 +189,9 @@ void FuzzySystem::run(float a, float b)
 
 void FuzzySystem::run()
 {
+    if (!initialized)
+        throw runtime_error("System uninitialized!");
+
     //fuzzyfy values
     console_log("");
     console_log("Fuzzyfying values");

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <exception>
 
 #include "Log.h"
 #include "FuzzySystem.h"
@@ -12,9 +13,13 @@ int main()
     set_log_level(log_level::BUILD);
 
     FuzzySystem fs;
-    fs.initSettingsFromFile("example.txt");
+    fs.initSettingsFromFile("example2.txt");
 
-    fs.run();
+    try {
+        fs.run();
+    } catch (const exception& e) {
+        cout << e.what() << endl;
+    }
 
 
 

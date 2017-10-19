@@ -32,6 +32,8 @@ class FuzzySystem
         void run(float a, float b);
 
     private:
+        bool initialized = false;
+
         Settings settings;
 
         Rulebase rb;
@@ -39,8 +41,8 @@ class FuzzySystem
         FuzzyVariable fuzzyIn2;
         FuzzyVariable fuzzyOut;
 
-        float currentValue1;
-        float currentValue2;
+        float currentValue1 = 0.f;
+        float currentValue2 = 0.f;
 
         Fuzzyfier fuzzyfier;
 };

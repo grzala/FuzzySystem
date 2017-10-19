@@ -1,9 +1,9 @@
 thermostat rulebase
 
-Rule1: If temperature is high or current is high then reduce current
-Rule2: If temperature is medium then no change to current
-Rule3: If temperature is low and current is high then no change to current
-Rule4: If temperature is low and current is low then increase current
+Rule1: If temperature is high or current is high then current is reduce
+Rule2: If temperature is medium then current is no_change
+Rule3: If temperature is low and current is high then current is no_change
+Rule4: If temperature is low and current is low then current is increase
 
 current
 
