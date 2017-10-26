@@ -35,10 +35,10 @@ void InferenceEngine::infer(fuzzy_engine_input in)
         {
             string name2 = rule.getAntecedenceInput2();
             float val2 = input_map[name2][rule.getAntecedenceCondition2()];
-            if (rule.getOperation() == OR) {
+            if (rule.getOperand() == OR) {
                 console_debug("OR " + name2 + ": " + to_string(val2));
                 i_result.push_back(pair<string, float>(consequenceName, max(val1, val2)));
-            } else if (rule.getOperation() == AND) {
+            } else if (rule.getOperand() == AND) {
                 console_debug("AND " + name2 + ": " + to_string(val2));
                 i_result.push_back(pair<string, float>(consequenceName, min(val1, val2)));
             }

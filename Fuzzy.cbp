@@ -18,7 +18,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Static">
-				<Option output="bin/Static/Fuzzy" prefix_auto="1" extension_auto="1" />
+				<Option output="lib/Fuzzy" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="" />
 				<Option type="2" />
 				<Option compiler="gcc" />
