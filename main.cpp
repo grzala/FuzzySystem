@@ -12,7 +12,7 @@ int main()
 {
     set_log_level(log_level::BUILD);
 
-    /*
+
     FuzzySystem fs;
     fs.initSettingsFromFile("example2.txt");
 
@@ -22,8 +22,8 @@ int main()
     } catch (const exception& e) {
         cout << e.what() << endl;
     }
-    */
 
+    /*
     try {
         Rule r1("Rule1: if temperature is high or temperature is bonkers or current is high or current is low or temperature is low then change_in_current is decrease");
         Rule r3("Rule1: If temperature is high then change_in_current is decrease");
@@ -31,6 +31,7 @@ int main()
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }
+    */
 
     return 0;
 }

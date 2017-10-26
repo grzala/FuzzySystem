@@ -30,11 +30,7 @@ class Rule
         string getRuleFull() { return rule_full; }
         bool isTwoPart() { return false; }
 
-        string getAntecedenceInput1() { return antecedenceInput1; }
-        string getAntecedenceCondition1() { return antecedenceCondition1; }
         SetOperation getOperand() { return operand; }
-        string getAntecedenceInput2() { return antecedenceInput2; }
-        string getAntecedenceCondition2() { return antecedenceCondition2; }
         string getConsequenceOutput() { return consequenceOutput; }
         string getConsequence() { return consequence; }
 
@@ -44,19 +40,12 @@ class Rule
     private:
         string rule_full;
 
-        string antecedenceInput1;
-        string antecedenceCondition1;
-
         SetOperation operand;
-
-        string antecedenceInput2;
-        string antecedenceCondition2;
+        vector<string> antecedenceInputs;
+        vector<string> antecedenceConditions;
 
         string consequenceOutput;
         string consequence;
-
-        vector<string> antecedenceInputs;
-        vector<string> antecedenceConditions;
 
         bool checkConvention(string rule);
         pair<string, int> countOperands(string rule);

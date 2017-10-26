@@ -26,26 +26,37 @@ void InferenceEngine::infer(fuzzy_engine_input in)
     vector<pair<string, float>> i_result;
     for (auto rule : rules)
     {
-        string name1 = rule.getAntecedenceInput1();
-        string consequenceName = rule.getConsequence();
-        float val1 = input_map[name1][rule.getAntecedenceCondition1()];
-        console_debug(name1 + ": " + to_string(val1));
+        vector<string> inputNames = rule.getAntecedenceInputs();
+        vector<string> inputConditions = rule.getAntecedenceConditions();
 
-        if (rule.isTwoPart())
-        {
-            string name2 = rule.getAntecedenceInput2();
-            float val2 = input_map[name2][rule.getAntecedenceCondition2()];
-            if (rule.getOperand() == OR) {
-                console_debug("OR " + name2 + ": " + to_string(val2));
-                i_result.push_back(pair<string, float>(consequenceName, max(val1, val2)));
-            } else if (rule.getOperand() == AND) {
-                console_debug("AND " + name2 + ": " + to_string(val2));
-                i_result.push_back(pair<string, float>(consequenceName, min(val1, val2)));
-            }
+        string consequence = rule.getConsequence();
+
+        if (inputNames.size() == 1) {
+            console_debug("One part antecedent");
+            float val = input_map[inputNames[0]][inputConditions[0]];
+            console_debug(consequence + ": " + to_string(val));
+            i_result.push_back(pair<string, float>(consequence, val));
         } else
         {
-            i_result.push_back(pair<string, float>(consequenceName, val1));
+            console_debug("Multipart antecedent");
+            vector<float> values;
+            for (unsigned int i = 0; i < inputNames.size(); i++)
+                values.push_back(input_map[inputNames[i]][inputConditions[i]]);
+
+            string debugstr;
+            float val;
+            if (rule.getOperand() == OR) {
+                debugstr = "OR";
+                val = *max_element(values.begin(), values.end());
+            } else if (rule.getOperand() == AND) {
+                debugstr = "AND";
+                val = *min_element(values.begin(), values.end());
+            }
+            debugstr.append(consequence + ": " + to_string(val));
+            console_debug(debugstr);
+            i_result.push_back(pair<string, float>(consequence, val));
         }
+
         console_debug("");
     }
     console_debug("");
