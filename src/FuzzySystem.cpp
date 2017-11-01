@@ -55,13 +55,27 @@ void FuzzySystem::applySettings(Settings s)
     }
     console_log("Fuzzy settings applied.");
 
+    KnowledgeBase k;
+    k.name = s.rulebaseName;
     k.fuzzyOut = fuzzyvars[fuzzyvars.size()-1]; //last fuzzyvariable is output
     fuzzyvars.pop_back();
     k.fuzzyIn = fuzzyvars;
 
     k.rb = rb;
+
+    try {
+        checkKnowledgebaseIntegrity(k);
+    } catch(exception& e)
+    {
+        console_write(e.what());
+        console_write("Settings not applied.");
+        return;
+    }
+    console_log("Knowledge base holds integrity.");
+
+    this->k = k;
     settings = s;
-    console_write("Settings correctly applied.");
+    console_write("Settings applied.");
 
     init();
 }
@@ -152,5 +166,40 @@ void FuzzySystem::run()
 void FuzzySystem::printResult()
 {
     cout << k.fuzzyOut.getName() + " is " + to_string(currentResult) << endl;
+}
+
+int find_fuzzy_by_name(vector<FuzzyVariable> fuzzys, string target) {
+    for (unsigned int i = 0; i < fuzzys.size(); i++) {
+        if (fuzzys[i].getName() == target)
+            return i;
+    }
+
+    return -1;
+}
+
+void FuzzySystem::checkKnowledgebaseIntegrity(KnowledgeBase k)
+{
+    vector<FuzzyVariable> possible_antecedens = k.fuzzyIn;
+    FuzzyVariable consequent = k.fuzzyOut;
+    for (auto rule : k.rb.getRules()) {
+        vector<string> antIn = rule.getAntecedenceInputs();
+        vector<string> antCon = rule.getAntecedenceConditions();
+        string conOut = rule.getConsequenceOutput();
+        string con = rule.getConsequence();
+
+
+        for (unsigned int i = 0; i < antIn.size(); i++) {
+            int fuzzy_i = find_fuzzy_by_name(possible_antecedens, antIn[i]);
+            if (fuzzy_i < 0) throw runtime_error("Antecedent " + antIn[i] + " has no valid corresponding fuzzy variable.");
+
+            FuzzyVariable f = possible_antecedens[fuzzy_i];
+            if (!f.hasSet(antCon[i])) throw runtime_error("Antecedent " + antIn[i] + " has no fuzzy set " + antCon[i]);
+        }
+
+        if (conOut != consequent.getName()) throw runtime_error("Consequent " + con + " does not correspond to fuzzy output name " + consequent.getName());
+        if (!consequent.hasSet(con)) throw runtime_error("Consequent " + con + " has no fuzzy set " + con);
+    }
+
+    exit(0);
 }
 

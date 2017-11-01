@@ -23,12 +23,14 @@ class FuzzyVariable
 
         string getName() { return name; }
         FuzzySet getSet(int i) { return sets[i]; }
+        bool hasSet(string name);
 
         string toString();
 
         fuzzy_values calculateFuzzy(float val);
 
         FuzzySet* getSetByName(string name);
+
 
     private:
         string name;

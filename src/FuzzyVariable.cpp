@@ -37,7 +37,7 @@ fuzzy_values FuzzyVariable::calculateFuzzy(float val)
     for (unsigned int i = 0; i < sets.size(); i++)
     {
         FuzzySet s = sets[i];
-        result[s.Getname()] = s.membership(val);
+        result[s.getName()] = s.membership(val);
     }
     return result;
 }
@@ -46,7 +46,17 @@ FuzzySet* FuzzyVariable::getSetByName(string name)
 {
     for (unsigned int i = 0; i < sets.size(); i++)
     {
-        if (sets[i].Getname() == name) return &sets[i];
+        if (sets[i].getName() == name) return &sets[i];
     }
     return nullptr;
+}
+
+bool FuzzyVariable::hasSet(string name)
+{
+    for (auto s : sets)
+    {
+        if (s.getName() == name) return true;
+    }
+
+    return false;
 }

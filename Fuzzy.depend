@@ -61,17 +61,18 @@
 1508108551 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 
-1509534696 source:c:\users\grzala\onedrive\fuzzy\main.cpp
+1509557461 source:c:\users\grzala\onedrive\fuzzy\main.cpp
 	<iostream>
 	<exception>
 	"Log.h"
 	"FuzzySystem.h"
 
-1509496743 c:\users\grzala\onedrive\fuzzy\include\settings.h
+1509558525 c:\users\grzala\onedrive\fuzzy\include\settings.h
 	<iostream>
 	<string>
 	<vector>
 	<array>
+	<algorithm>
 	<fstream>
 	<sstream>
 	<istream>
@@ -100,7 +101,7 @@
 	<exception>
 	"FuzzySet.h"
 
-1508448992 c:\users\grzala\onedrive\fuzzy\include\fuzzyset.h
+1509558483 c:\users\grzala\onedrive\fuzzy\include\fuzzyset.h
 	<iostream>
 	<string>
 	<sstream>
@@ -121,22 +122,22 @@
 1508428027 source:c:\users\grzala\onedrive\fuzzy\src\rulebase.cpp
 	"Rulebase.h"
 
-1509533999 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
+1509558449 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
 	"Settings.h"
 
 1509497933 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
 	"Fuzzyfier.h"
 
-1509497922 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
+1509534969 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
 	<string>
 	<array>
 	<exception>
 	"FuzzyVariable.h"
 
-1509534840 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1509558769 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
-1509498248 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+1509558167 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
 	<exception>
 	"Settings.h"
 	"Rulebase.h"
@@ -168,7 +169,7 @@
 1508450990 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
 	"Log.h"
 
-1508448058 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
+1509558355 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
 	<string>
 	<sstream>
 	<array>
@@ -177,7 +178,7 @@
 	<exception>
 	"FuzzySet.h"
 
-1508446491 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
+1509558506 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
 	"FuzzyVariable.h"
 
 1509498333 c:\users\grzala\onedrive\fuzzy\include\inferenceengine.h

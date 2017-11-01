@@ -14,6 +14,7 @@ int read_from_file(string& content, const char* path)
     std::stringstream contentstream;
     contentstream << inFile.rdbuf();
     content = contentstream.str();
+    transform(content.begin(), content.end(), content.begin(), ::tolower);
 
     //close file
     inFile.close();

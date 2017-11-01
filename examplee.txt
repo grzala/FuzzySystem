@@ -1,0 +1,38 @@
+comfort rulebase
+
+if humidity is high then comfort is bad
+if temperature is low and wind_speed is medium then comfort is bad
+if temperature is medium and wind_speed is high then comfort is neutral
+if temperature is medium and wind_speed is medium then comfort is good
+if temperature is high and wind_speed is medium then comfort is good
+
+
+ff temperature is high or current is high then change_in_current is decrease
+ff temperature is medium then change_in_current is no_change
+If temperature is low and current is high then change_in_current is no_change
+If temperature is low and current is low then change_in_current is increase
+
+temperature
+
+low -20 10 0
+medium 12 18 3 8
+warm 20 28 2 4
+high 25 40 6 0
+
+wind_speed
+
+low 0 6 0 6
+medium 10 15 2 5
+high 22 100 5 0
+
+humidity
+
+low 0 25 0 10
+medium 20 40 5 5
+high 35 100 5 0
+
+comfort(1 to 10)
+
+bad 0 2 0 2
+neutral 3.5 6.5 1 1
+good 8 10 2 0

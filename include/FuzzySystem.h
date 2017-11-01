@@ -17,6 +17,7 @@ namespace fsm
 {
 
 struct KnowledgeBase {
+    string name;
     Rulebase rb;
     vector <FuzzyVariable> fuzzyIn;
     FuzzyVariable fuzzyOut;
@@ -44,6 +45,8 @@ class FuzzySystem
 
         string getFuzzyOutName() { return k.fuzzyOut.getName(); }
         vector<float> getCurrentValues() { return currentValues; }
+
+        void checkKnowledgebaseIntegrity(KnowledgeBase k);
 
     private:
         bool initialized = false;

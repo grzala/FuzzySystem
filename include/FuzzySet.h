@@ -21,7 +21,7 @@ class FuzzySet
         FuzzySet(string values);
         FuzzySet();
 
-        string Getname() {return name;}
+        string getName() {return name;}
         float getA() { return a; }
         float getB() { return b; }
         float getAlpha() { return alpha; }

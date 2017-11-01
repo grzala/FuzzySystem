@@ -16,18 +16,14 @@ class Fuzzyfier
     public:
         Fuzzyfier();
 
-
         void setCrispInput(vector<FuzzyVariable>* variables) {this->variables = variables;}
         void fuzzyfy(vector<float> vals);
         vector<fuzzy_values> getResult() {return currentResult;}
-
-
 
     private:
         vector<FuzzyVariable>* variables;
 
         vector<fuzzy_values> currentResult;
-
 
 };
 

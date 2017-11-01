@@ -19,7 +19,8 @@ int main()
     //std::vector<float> vals {17, 300};
     std::map<string, float> vals;
     vals["temperature"] = 300;
-    vals["current"] = 17;
+    vals["wind_speed"] = 17;
+    vals["humidity"] = 100;
 
     try {
         fs.run(vals);
