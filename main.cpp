@@ -16,8 +16,13 @@ int main()
     FuzzySystem fs;
     fs.initSettingsFromFile("example2.txt");
 
+    //std::vector<float> vals {17, 300};
+    std::map<string, float> vals;
+    vals["temperature"] = 300;
+    vals["current"] = 17;
+
     try {
-        fs.run();
+        fs.run(vals);
         fs.printResult();
     } catch (const exception& e) {
         cout << e.what() << endl;

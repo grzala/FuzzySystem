@@ -6,6 +6,7 @@
 
 #include <exception>
 
+
 #include "FuzzyVariable.h"
 
 namespace fsm {
@@ -15,18 +16,17 @@ class Fuzzyfier
     public:
         Fuzzyfier();
 
-        void setCrispInput(FuzzyVariable* a, FuzzyVariable* b);
-        void fuzzyfy(float val1, float val2);
-        array<fuzzy_values, 2> getResult() {return currentResult;}
+
+        void setCrispInput(vector<FuzzyVariable>* variables) {this->variables = variables;}
+        void fuzzyfy(vector<float> vals);
+        vector<fuzzy_values> getResult() {return currentResult;}
 
 
 
     private:
+        vector<FuzzyVariable>* variables;
 
-        FuzzyVariable* fIn1;
-        FuzzyVariable* fIn2;
-
-        array<fuzzy_values, 2> currentResult;
+        vector<fuzzy_values> currentResult;
 
 
 };

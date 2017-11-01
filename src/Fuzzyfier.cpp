@@ -7,18 +7,15 @@ Fuzzyfier::Fuzzyfier()
 
 }
 
-
-void Fuzzyfier::setCrispInput(FuzzyVariable* a, FuzzyVariable* b)
+void Fuzzyfier::fuzzyfy(vector<float> vals)
 {
-    fIn1 = a;
-    fIn2 = b;
-}
+    vector<fuzzy_values> result;
 
-void Fuzzyfier::fuzzyfy(float val1, float val2)
-{
-    array<fuzzy_values, 2> result;
-    result[0] = fIn1->calculateFuzzy(val1);
-    result[1] = fIn2->calculateFuzzy(val2);
+    if (vals.size() != variables->size())
+        throw new runtime_error("Fuzzyfier input size must be the same as fuzzy variables number");
+
+    for (unsigned int i = 0; i < vals.size(); i++)
+        result.push_back(variables->at(i).calculateFuzzy(vals[i]));
 
     currentResult = result;
 }

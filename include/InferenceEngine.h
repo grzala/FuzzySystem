@@ -12,7 +12,7 @@
 
 namespace fsm {
 
-typedef array<pair<string, fuzzy_values>, 2> fuzzy_engine_input;
+typedef vector<pair<string, fuzzy_values>> fuzzy_engine_input;
 typedef map<string, float> fuzzy_engine_output;
 
 class InferenceEngine

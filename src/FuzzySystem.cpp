@@ -37,13 +37,15 @@ void FuzzySystem::applySettings(Settings s)
         vector<fuzzy_pair> pairs = s.fuzzy_pairs;
 
         for (auto fuzzy_pair : pairs) {
+            console_log("Building " + fuzzy_pair.first);
             vector<FuzzySet> sets;
 
-            for (unsigned int i = 0; i < c1Sets.size(); i++)
-                sets.push_back(FuzzySet(c1Sets[i]));
-            fuzzyvars.push_back(FuzzyVariable(c1Name, sets));
+            for (unsigned int i = 0; i < fuzzy_pair.second.size(); i++)
+                sets.push_back(FuzzySet(fuzzy_pair.second[i]));
+            fuzzyvars.push_back(FuzzyVariable(fuzzy_pair.first, sets));
         }
 
+        if (fuzzyvars.size() < 3) throw runtime_error("System cannot have less than 2 inputs");
     } catch (const exception& e)
     {
         console_write("Error while applying crisp input settings.");
@@ -51,40 +53,15 @@ void FuzzySystem::applySettings(Settings s)
         console_write("Settings remain unchanged.");
         return;
     }
-    console_log("Crisp settings applied.");
+    console_log("Fuzzy settings applied.");
 
-    k.fuzzyIn1 = fuzzyvars[0];
-    k.fuzzyIn2 = fuzzyvars[1];
+    k.fuzzyOut = fuzzyvars[fuzzyvars.size()-1]; //last fuzzyvariable is output
+    fuzzyvars.pop_back();
+    k.fuzzyIn = fuzzyvars;
 
-    k.fuzzyOut = fuzzyvars[2];
     k.rb = rb;
     settings = s;
     console_write("Settings correctly applied.");
-}
-
-void FuzzySystem::applyValues(pair<string, float> a, pair<string, float> b)
-{
-    float v1, v2;
-
-    if (a.first == b.first)
-        throw invalid_argument("Values cannot both refer to the same input (" + a.first + ")");
-
-    if (k.fuzzyIn1.getName() == a.first)
-        v1 = a.second;
-    else if (k.fuzzyIn2.getName() == a.first)
-        v2 = a.second;
-    else
-        throw invalid_argument("Input " + a.first + " not recognized");
-
-    if (k.fuzzyIn1.getName() == b.first)
-        v1 = b.second;
-    else if (k.fuzzyIn2.getName() == b.first)
-        v2 = b.second;
-    else
-        throw invalid_argument("Input " + b.first + " not recognized");
-
-    currentValue1 = v1;
-    currentValue2 = v2;
 
     init();
 }
@@ -92,7 +69,7 @@ void FuzzySystem::applyValues(pair<string, float> a, pair<string, float> b)
 void FuzzySystem::init()
 {
     fuzzyfier = Fuzzyfier();
-    fuzzyfier.setCrispInput(&k.fuzzyIn1, &k.fuzzyIn2);
+    fuzzyfier.setCrispInput(&k.fuzzyIn);
 
     engine = InferenceEngine();
     engine.setRulebase(&k.rb);
@@ -110,10 +87,25 @@ void FuzzySystem::initSettingsFromFile(const char* path)
     applySettings(s);
 }
 
-void FuzzySystem::run(pair<string, float> a, pair<string, float> b)
+void FuzzySystem::applyValues(map<string, float> vals)
+{
+    vector<float> result;
+
+    for (auto f : k.fuzzyIn) {
+        if (vals.find(f.getName()) != vals.end()) {
+            result.push_back(vals[f.getName()]);
+        } else {
+            throw runtime_error("Error: value for " + f.getName() + " not defined.");
+        }
+    }
+
+    currentValues = result;
+}
+
+void FuzzySystem::run(map<string, float> vals)
 {
     try {
-        applyValues(a, b);
+        applyValues(vals);
     } catch (const exception& e) {
         console_write("Cannot run fuzzy: Values incorrect.");
         console_write(e.what());
@@ -123,10 +115,10 @@ void FuzzySystem::run(pair<string, float> a, pair<string, float> b)
     run();
 }
 
-void FuzzySystem::run(float a, float b)
+void FuzzySystem::run(vector<float> vals)
 {
-    currentValue1 = a;
-    currentValue2 = b;
+    if (vals.size() != k.fuzzyIn.size()) throw runtime_error("Fuzzy system input must be same size as fuzzy variables in knowledge base.");
+    currentValues = vals;
     run();
 }
 
@@ -138,30 +130,16 @@ void FuzzySystem::run()
     //fuzzyfy values
     console_log("");
     console_log("Fuzzyfying values");
-    fuzzyfier.fuzzyfy(currentValue1, currentValue2);
-    array<fuzzy_values, 2> fuzzyfied = fuzzyfier.getResult();
+    fuzzyfier.fuzzyfy(currentValues);
+    vector<fuzzy_values> fuzzyfied = fuzzyfier.getResult();
     console_log("Values fuzzified");
-    //print for debug
-    if (get_log_level() == log_level::BUILD)
-    {
-        fuzzy_values fs0 = fuzzyfied[0]; fuzzy_values fs1 = fuzzyfied[1];
-        console_debug("Fuzzyfied value for: " + k.fuzzyIn1.getName());
-        for (auto const& fuzzy_value : fs0) {
-            console_debug(fuzzy_value.first + " " + to_string(fuzzy_value.second));
-        }
-        console_debug("");
-        console_debug("Fuzzyfied value for: " + k.fuzzyIn2.getName());
-        for (auto const& fuzzy_value : fs1) {
-            console_debug(fuzzy_value.first + " " + to_string(fuzzy_value.second));
-        }
-        console_debug("");
-    }
 
     //infer
     console_log("Start Inference engine");
-    fuzzy_engine_input engine_in;
-    engine_in[0] = pair<string, fuzzy_values>(k.fuzzyIn1.getName(), fuzzyfied[0]);
-    engine_in[1] = pair<string, fuzzy_values>(k.fuzzyIn2.getName(), fuzzyfied[1]);
+    fuzzy_engine_input engine_in; //fuzzyfied input to map
+    for (unsigned int i = 0; i < fuzzyfied.size(); i++) {
+        engine_in.push_back(pair<string, fuzzy_values>(k.fuzzyIn[i].getName(), fuzzyfied[i]));
+    }
     engine.infer(engine_in);
 
     fuzzy_engine_output fuzzy_output = engine.getResult();

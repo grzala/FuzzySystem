@@ -31,7 +31,7 @@ void nextLine(vector<string> lines, unsigned int& i, bool find_non_empty = false
     do //move to next non empty line
     {
         i++;
-        if (i == lines.size()) //end of vector reached
+        if (i >= lines.size()) //end of vector reached
         {
             i--; //leave counter at last line to prevent out of bounds exception
             i--; //leave counter at last line to prevent out of bounds exception
@@ -73,8 +73,6 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
     readState state = RULEBASE;
 
     unsigned int i = 0;
-    unsigned int input_no = 0;
-    const unsigned int input_total = 3;
 
     console_log("Parsing file...");
     while (state != FINISHED) {
@@ -105,30 +103,27 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
             {
                 //get first non empty
                 console_log("Parsing crisp...");
-                nextLine(lines, i, true);
-                string inputName(lines[i]);
-                console_log("Crisp " + to_string(input_no) + ": " + inputName);
 
-                nextLine(lines, i, true); //go to tuples
-                vector<string> fuzzyTuples;
-                while (!isWhiteSpaceString(lines[i]))
-                {
-                    console_log(lines[i]);
-                    fuzzyTuples.push_back(lines[i]);
-                    i++;
+                try { //do until end of file
+                    nextLine(lines, i, true);
+                    string inputName(lines[i]);
+                    console_log("Crisp " + inputName);
+
+                    nextLine(lines, i, true); //go to tuples
+                    vector<string> fuzzyTuples;
+                    while (i < lines.size() && !isWhiteSpaceString(lines[i]))
+                    {
+                        console_log(lines[i]);
+                        fuzzyTuples.push_back(lines[i]);
+                        i++;
+                    }
+
+                    s.fuzzy_pairs.push_back(fuzzy_pair(inputName, fuzzyTuples));
+                } catch (std::exception& e) {
+                    state = FINISHED;
                 }
 
-                if (input_no == 0)
-                    s.fuzzy_in_1 = fuzzy_pair(inputName, fuzzyTuples);
-                else if (input_no == 1)
-                    s.fuzzy_in_2 = fuzzy_pair(inputName, fuzzyTuples);
-                else if (input_no == 2)
-                    s.fuzzy_out = fuzzy_pair(inputName, fuzzyTuples);
                 console_log("");
-
-                input_no++;
-                if (input_no == input_total)
-                    state = FINISHED;
             }
             break;
 

@@ -18,7 +18,7 @@ namespace fsm
 
 struct KnowledgeBase {
     Rulebase rb;
-    vector <FuzzyVariable> FuzzyIn;
+    vector <FuzzyVariable> fuzzyIn;
     FuzzyVariable fuzzyOut;
 };
 
@@ -33,19 +33,17 @@ class FuzzySystem
         void initSettingsFromFile(const char* path);
         void init();
 
-        void applyValues(array<pair<string, float>, 2> vals) {applyValues(vals[0], vals[1]);}
-        void applyValues(pair<string, float> a, pair<string, float> b);
+        void applyValues(map<string, float> vals);
 
         void run();
-        void run(array<pair<string, float>, 2> vals) {run(vals[0], vals[1]);}
-        void run(pair<string, float> a, pair<string, float> b);
-        void run(float a, float b);
+        void run(map<string, float> vals);
+        void run(vector<float> vals);
 
         float getResult() {return currentResult;}
         void printResult();
 
         string getFuzzyOutName() { return k.fuzzyOut.getName(); }
-        array<float, 2> getCurrentValues() { array<float, 2> ar = {currentValue1, currentValue2}; return ar;}
+        vector<float> getCurrentValues() { return currentValues; }
 
     private:
         bool initialized = false;
@@ -54,8 +52,7 @@ class FuzzySystem
         Settings settings;
         KnowledgeBase k;
 
-        float currentValue1 = 0.f;
-        float currentValue2 = 0.f;
+        vector<float> currentValues;
         float currentResult = 0.f;
         //////////////////////////
 
