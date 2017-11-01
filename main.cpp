@@ -18,13 +18,14 @@ int main()
 
     //std::vector<float> vals {17, 300};
     std::map<string, float> vals;
-    vals["temperature"] = 300;
-    vals["wind_speed"] = 17;
-    vals["humidity"] = 100;
+    //vals["temperature"] = 300;
+    //vals["wind_speed"] = 17;
+    //vals["humidity"] = 100;
 
     try {
-        fs.run(vals);
-        fs.printResult();
+        //fs.run(vals);
+        while(fs.run_from_stdin())
+            fs.printResult();
     } catch (const exception& e) {
         cout << e.what() << endl;
     }

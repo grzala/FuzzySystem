@@ -199,7 +199,37 @@ void FuzzySystem::checkKnowledgebaseIntegrity(KnowledgeBase k)
         if (conOut != consequent.getName()) throw runtime_error("Consequent " + con + " does not correspond to fuzzy output name " + consequent.getName());
         if (!consequent.hasSet(con)) throw runtime_error("Consequent " + con + " has no fuzzy set " + con);
     }
+}
 
-    exit(0);
+bool FuzzySystem::run_from_stdin()
+{
+    cout << "Provide values for inputs. Type in 'q' at any time to exit." << endl;
+
+    vector<string> inNames = getFuzzyInNames();
+    string in;
+
+    currentValues.clear();
+
+    try {
+        for (string inName : inNames)
+        {
+            cout << "Provide input for: " << inName << endl;
+
+            cin >> in;
+            if (in == "q") return false;
+
+            currentValues.push_back(stof(in));
+        }
+    } catch (exception& e)
+    {
+        cout << "Error, wrong value provided. Could not convert " + in + " to float." << endl;
+        return false;
+    }
+
+    cout << endl << endl;
+
+    run();
+
+    return true;
 }
 

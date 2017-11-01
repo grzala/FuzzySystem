@@ -39,10 +39,16 @@ class FuzzySystem
         void run();
         void run(map<string, float> vals);
         void run(vector<float> vals);
+        bool run_from_stdin();
 
         float getResult() {return currentResult;}
         void printResult();
 
+        vector<string> getFuzzyInNames() {
+            vector<string> result;
+            for (auto f : k.fuzzyIn) result.push_back(f.getName());
+            return result;
+        }
         string getFuzzyOutName() { return k.fuzzyOut.getName(); }
         vector<float> getCurrentValues() { return currentValues; }
 
