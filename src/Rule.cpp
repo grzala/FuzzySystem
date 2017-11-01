@@ -54,7 +54,7 @@ Rule::~Rule()
 bool Rule::checkConvention(string rule)
 {
     regex r;
-    r = regex(".*? if .*? is .*? then .*?");
+    r = regex("(.*?)if .*? is .*? then .*?");
     return regex_match(rule, r);
 }
 
@@ -89,14 +89,14 @@ void Rule::parseAntecedents(string rule, string operand, int operand_no)
     if (operand_no == 0)
     {
         smatch m;
-        r = regex("\\bif\\b.*?\\bthen\\b");
+        r = regex("if\\b.*?\\bthen\\b");
         regex_search(rule, m, r);
         if (m.size() < 1) throw invalid_argument("Invalid Rule: " + rule + "; Rule ill defined, no IF THEN found.");
         antecedents.push_back(m[0]);
     }
     else
     {
-        r = regex("(\\bif\\b.*?(?=\\b"+operand+"\\b))|(\\b"+operand+"\\b.*?(?=\\b"+operand+"\\b))|(\\b"+operand+"\\b.*?\\bthen\\b)");
+        r = regex("(if\\b.*?(?=\\b"+operand+"\\b))|(\\b"+operand+"\\b.*?(?=\\b"+operand+"\\b))|(\\b"+operand+"\\b.*?\\bthen\\b)");
 
         const auto begin_iterator = std::sregex_iterator( rule.cbegin(), rule.cend(), r );
         const auto end_iterator = std::sregex_iterator();

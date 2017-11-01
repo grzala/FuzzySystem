@@ -18,8 +18,7 @@ namespace fsm
 
 struct KnowledgeBase {
     Rulebase rb;
-    FuzzyVariable fuzzyIn1;
-    FuzzyVariable fuzzyIn2;
+    vector <FuzzyVariable> FuzzyIn;
     FuzzyVariable fuzzyOut;
 };
 
@@ -45,8 +44,6 @@ class FuzzySystem
         float getResult() {return currentResult;}
         void printResult();
 
-        string getFuzzyIn1Name() { return k.fuzzyIn1.getName(); }
-        string getFuzzyIn2Name() { return k.fuzzyIn2.getName(); }
         string getFuzzyOutName() { return k.fuzzyOut.getName(); }
         array<float, 2> getCurrentValues() { array<float, 2> ar = {currentValue1, currentValue2}; return ar;}
 

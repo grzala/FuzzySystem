@@ -28,7 +28,6 @@ class Rule
         virtual ~Rule();
 
         string getRuleFull() { return rule_full; }
-        bool isTwoPart() { return false; }
 
         SetOperation getOperand() { return operand; }
         string getConsequenceOutput() { return consequenceOutput; }

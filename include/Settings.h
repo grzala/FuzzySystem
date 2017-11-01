@@ -26,9 +26,7 @@ struct Settings
     vector<string>rules;
 
 
-    fuzzy_pair fuzzy_in_1;
-    fuzzy_pair fuzzy_in_2;
-    fuzzy_pair fuzzy_out;
+    vector<fuzzy_pair> fuzzy_pairs;
 
     string value1;
     string value2;

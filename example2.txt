@@ -22,6 +22,3 @@ change_in_current
 decrease -50 -50 50 50
 no_change 0 0 50 50
 increase 50 50 50 50
-
-temperature = 300
-current = 17

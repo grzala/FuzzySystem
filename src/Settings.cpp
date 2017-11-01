@@ -67,7 +67,6 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
     enum readState {
         RULEBASE,
         INPUT,
-        VALUES,
         FINISHED,
     };
 
@@ -129,37 +128,8 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
 
                 input_no++;
                 if (input_no == input_total)
-                    state = VALUES;
+                    state = FINISHED;
             }
-            break;
-
-        case VALUES:
-                console_log("Parsing values...");
-                try { //if values are given in the end of file
-                    nextLine(lines, i, true);
-                    console_log("value 1: " + lines[i]);
-                    s.value1 = lines[i];
-                    i++;
-                    console_log("value 2: " + lines[i]);
-                    s.value2 = lines[i];
-                } catch(std::exception& e) { //if no values are found, ask for manual input
-                    cout << "No values were given or incorrectly defined. You can input them manually:" << endl;
-                    string name1(s.fuzzy_in_1.first);
-                    cout << name1 << " = ";
-                    string in;
-                    cin >> in;
-                    in = name1.append(" = " + in);
-                    s.value1 = in;
-
-                    string name2(s.fuzzy_in_2.first);
-                    cout << name2 << " = ";
-                    cin >> in;
-                    in = name2.append(" = " + in);
-                    s.value2 = in;
-                }
-
-                state = FINISHED;
-
             break;
 
         case FINISHED:
