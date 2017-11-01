@@ -13,7 +13,7 @@ Rule::Rule(string rule)
     this->rule_full = rule;
     string c_rule = rule;
     transform(rule.begin(), rule.end(), rule.begin(), ::tolower);
-    //rule.erase(std::remove(rule.begin(), rule.end(), ' '), rule.end());
+    //rule.erase(std:remove(rule.begin(), rule.end(), ' '), rule.end());
     string str;
     regex r;
     smatch m;

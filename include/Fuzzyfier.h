@@ -11,19 +11,22 @@
 
 namespace fsm {
 
+typedef vector<pair<string, fuzzy_values>> fuzzyfier_output;
+
 class Fuzzyfier
 {
     public:
         Fuzzyfier();
 
-        void setCrispInput(vector<FuzzyVariable>* variables) {this->variables = variables;}
+        void setFuzzyVariables(vector<FuzzyVariable>* variables) {this->variables = variables;}
         void fuzzyfy(vector<float> vals);
-        vector<fuzzy_values> getResult() {return currentResult;}
+        fuzzyfier_output getResult() {return currentResult;}
+        string strfyResults();
 
     private:
         vector<FuzzyVariable>* variables;
 
-        vector<fuzzy_values> currentResult;
+        fuzzyfier_output currentResult;
 
 };
 

@@ -83,7 +83,7 @@ void FuzzySystem::applySettings(Settings s)
 void FuzzySystem::init()
 {
     fuzzyfier = Fuzzyfier();
-    fuzzyfier.setCrispInput(&k.fuzzyIn);
+    fuzzyfier.setFuzzyVariables(&k.fuzzyIn);
 
     engine = InferenceEngine();
     engine.setRulebase(&k.rb);
@@ -146,15 +146,12 @@ void FuzzySystem::run()
     console_log("");
     console_log("Fuzzyfying values");
     fuzzyfier.fuzzyfy(currentValues);
-    vector<fuzzy_values> fuzzyfied = fuzzyfier.getResult();
+    fuzzyfier_output fuzzyfied = fuzzyfier.getResult();
     console_log("Values fuzzified");
 
     //infer
     console_log("Start Inference engine");
-    fuzzy_engine_input engine_in; //fuzzyfied input to map
-    for (unsigned int i = 0; i < fuzzyfied.size(); i++) {
-        engine_in.push_back(pair<string, fuzzy_values>(k.fuzzyIn[i].getName(), fuzzyfied[i]));
-    }
+    fuzzy_engine_input engine_in = fuzzyfied;
     engine.infer(engine_in);
 
     fuzzy_engine_output fuzzy_output = engine.getResult();

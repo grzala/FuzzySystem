@@ -12,6 +12,13 @@ Defuzzyfier::~Defuzzyfier()
     //dtor
 }
 
+float get_trapezoid_center(float a, float b, float c)
+{
+    float one = (2.f*a*c) + (a*a) + (c*b) + (a*b) + (b*b);
+    float two = 3.f*(a+b);
+    return one/two;
+}
+
 void Defuzzyfier::defuzzyfy(map<string, float> in)
 {
     vector<string> names;
@@ -33,10 +40,12 @@ void Defuzzyfier::defuzzyfy(map<string, float> in)
         array<float, 2> trapezoid_bounds = set->invert_membership(s.second);
         float x_a = trapezoid_bounds[0];
         float x_b = trapezoid_bounds[1];
-        float a = x_b - x_a;
-        float b = (set->getB() + set->getBeta()) - (set->getA() - set->getAlpha());
+        float a = x_b - x_a; //top bar
+        float b = (set->getB() + set->getBeta()) - (set->getA() - set->getAlpha()); //bottom bar
+        float c = x_a-(set->getA() - set->getAlpha()); //distance from beggining of trapezoid to x_a
 
-        console_debug("Calculating area |  a: " + to_string(a) + "; b:" + to_string(b) + "; h: " + to_string(h) + ";");
+        console_debug("x_a: " + to_string(x_a) + "; x_b: " + to_string(x_b));
+        console_debug("Calculating area |  a: " + to_string(a) + "; b:" + to_string(b) + "; c: " + to_string(c) + "; h: " + to_string(h) + ";");
         area = a+b;
         area = area/2;
         area = area*h;
@@ -44,8 +53,9 @@ void Defuzzyfier::defuzzyfy(map<string, float> in)
         console_debug("Area of " + s.first + ": " + to_string(area));
         areas.push_back(area);
 
-        float center = ((set->getB() + set->getBeta()) + (set->getA() - set->getAlpha()))/2;
-        center = center - min_x;
+        float center = get_trapezoid_center(a, b, c); //get center relative to A
+        center += set->getA() - set->getAlpha(); //calculate offset relative to global
+        center = center - min_x; //offset to prevent negative (is this necessary?)
         console_debug("Center of " + s.first + ": " + to_string(center));
         centers.push_back(center);
 
