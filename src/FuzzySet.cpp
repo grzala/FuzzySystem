@@ -42,7 +42,13 @@ FuzzySet::FuzzySet(string values)
     } while (0 != *str++);
 
     if (tokens.size() != 5) {
-        throw invalid_argument("Fuzzy Set init string must look like this: name a b alpha beta");
+        stringstream err;
+        err << "Fuzzy Set '" + values  + "' init string must look like this: name a b alpha beta\nTokens: " + to_string(tokens.size()) << endl;
+        err << "Tokens:" << endl;
+        for (string token : tokens)
+            err << token << endl;
+
+        throw invalid_argument(err.str());
     }
 
     init(tokens[0], stof(tokens[1]), stof(tokens[2]), stof(tokens[3]), stof(tokens[4]));

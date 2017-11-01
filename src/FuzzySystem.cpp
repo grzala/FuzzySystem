@@ -118,6 +118,7 @@ void FuzzySystem::applyValues(map<string, float> vals)
 
 void FuzzySystem::run(map<string, float> vals)
 {
+    console_log("Running for: " + k.name);
     try {
         applyValues(vals);
     } catch (const exception& e) {

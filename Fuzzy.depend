@@ -61,7 +61,7 @@
 1508108551 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 
-1509558980 source:c:\users\grzala\onedrive\fuzzy\main.cpp
+1509560049 source:c:\users\grzala\onedrive\fuzzy\main.cpp
 	<iostream>
 	<exception>
 	"Log.h"
@@ -113,7 +113,7 @@
 1508192024 source:c:\users\grzala\onedrive\fuzzy\src\crisp.cpp
 	"Crisp.h"
 
-1508450063 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyset.cpp
+1509561759 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyset.cpp
 	"FuzzySet.h"
 
 1509033734 source:c:\users\grzala\onedrive\fuzzy\src\rule.cpp
@@ -122,7 +122,7 @@
 1508428027 source:c:\users\grzala\onedrive\fuzzy\src\rulebase.cpp
 	"Rulebase.h"
 
-1509558449 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
+1509560495 source:c:\users\grzala\onedrive\fuzzy\src\settings.cpp
 	"Settings.h"
 
 1509497933 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
@@ -134,7 +134,7 @@
 	<exception>
 	"FuzzyVariable.h"
 
-1509559507 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1509560447 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
 1509559281 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
@@ -169,7 +169,7 @@
 1508450990 source:c:\users\grzala\onedrive\fuzzy\src\log.cpp
 	"Log.h"
 
-1509558355 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
+1509564451 c:\users\grzala\onedrive\fuzzy\include\fuzzyvariable.h
 	<string>
 	<sstream>
 	<array>
@@ -178,7 +178,7 @@
 	<exception>
 	"FuzzySet.h"
 
-1509558506 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
+1509564547 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyvariable.cpp
 	"FuzzyVariable.h"
 
 1509498333 c:\users\grzala\onedrive\fuzzy\include\inferenceengine.h
@@ -190,7 +190,7 @@
 	"FuzzyVariable.h"
 	"Log.h"
 
-1509030449 source:c:\users\grzala\onedrive\fuzzy\src\inferenceengine.cpp
+1509564089 source:c:\users\grzala\onedrive\fuzzy\src\inferenceengine.cpp
 	"InferenceEngine.h"
 
 1508448326 source:c:\users\grzala\onedrive\fuzzy\src\deffuzyfier.cpp
@@ -204,6 +204,6 @@
 	"Log.h"
 	"FuzzyVariable.h"
 
-1508450642 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
+1509564433 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
 	"Defuzzyfier.h"
 

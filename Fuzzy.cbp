@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="examplee.txt" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
@@ -34,6 +35,7 @@
 		</Compiler>
 		<Unit filename="example.txt" />
 		<Unit filename="example2.txt" />
+		<Unit filename="examplee.txt" />
 		<Unit filename="include/Defuzzyfier.h" />
 		<Unit filename="include/FuzzySet.h" />
 		<Unit filename="include/FuzzySystem.h" />

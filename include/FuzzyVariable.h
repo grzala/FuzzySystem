@@ -24,6 +24,7 @@ class FuzzyVariable
         string getName() { return name; }
         FuzzySet getSet(int i) { return sets[i]; }
         bool hasSet(string name);
+        float getMinX();
 
         string toString();
 

@@ -24,8 +24,10 @@ string FuzzyVariable::toString()
 {
     stringstream str;
 
-    str << "FuzzyVariable " << name << " consists of 3 fuzzy sets:" << endl;
-    str << sets[0].toString() << sets[1].toString() << sets[2].toString();
+    str << "FuzzyVariable " << name << " consists of fuzzy sets:" << endl;
+    for (FuzzySet s : sets) {
+        str << s.toString();
+    }
 
     return str.str();
 }
@@ -59,4 +61,16 @@ bool FuzzyVariable::hasSet(string name)
     }
 
     return false;
+}
+
+float FuzzyVariable::getMinX()
+{
+    float minX = std::numeric_limits<float>::max();
+
+    for (auto s : sets) {
+        float x = s.getA() - s.getAlpha();
+        if (x < minX) minX = x;
+    }
+
+    return minX;
 }

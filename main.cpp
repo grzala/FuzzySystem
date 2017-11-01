@@ -8,13 +8,19 @@
 
 using namespace fsm;
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc < 2) {
+        std::cout << "No filename provided!" << endl;
+        exit(1);
+    }
+    string filename = argv[1];
+
     set_log_level(log_level::BUILD);
 
 
     FuzzySystem fs;
-    fs.initSettingsFromFile("example2.txt");
+    fs.initSettingsFromFile(filename);
 
     //std::vector<float> vals {17, 300};
     std::map<string, float> vals;

@@ -18,7 +18,7 @@ void Defuzzyfier::defuzzyfy(map<string, float> in)
     vector<float> areas;
     vector<float> centers;
 
-    float min_x = fuzzy_output->getSet(0).getA() - fuzzy_output->getSet(0).getAlpha();
+    float min_x = fuzzy_output->getMinX();
 
     for (const auto s : in)
     {

@@ -19,8 +19,8 @@ void InferenceEngine::infer(fuzzy_engine_input in)
     vector<Rule> rules = rb->getRules();
 
     map<string, fuzzy_values> input_map;
-    input_map[in[0].first] = in[0].second;
-    input_map[in[1].first] = in[1].second;
+    for (auto i : in) input_map[i.first] = i.second;
+
 
     //infer
     vector<pair<string, float>> i_result;
@@ -34,22 +34,25 @@ void InferenceEngine::infer(fuzzy_engine_input in)
         if (inputNames.size() == 1) {
             console_debug("One part antecedent");
             float val = input_map[inputNames[0]][inputConditions[0]];
-            console_debug(consequence + ": " + to_string(val));
+            console_debug(inputNames[0] + ": " + inputConditions[0] + ", " + consequence + ": " + to_string(val));
             i_result.push_back(pair<string, float>(consequence, val));
         } else
         {
             console_debug("Multipart antecedent");
-            vector<float> values;
-            for (unsigned int i = 0; i < inputNames.size(); i++)
-                values.push_back(input_map[inputNames[i]][inputConditions[i]]);
 
             string debugstr;
+            vector<float> values;
+            for (unsigned int i = 0; i < inputNames.size(); i++) {
+                values.push_back(input_map[inputNames[i]][inputConditions[i]]);
+                debugstr.append(inputNames[i] + ": " + inputConditions[i] + ", ");
+            }
+
             float val;
             if (rule.getOperand() == OR) {
-                debugstr = "OR";
+                debugstr.append("OR");
                 val = *max_element(values.begin(), values.end());
             } else if (rule.getOperand() == AND) {
-                debugstr = "AND";
+                debugstr.append("AND");
                 val = *min_element(values.begin(), values.end());
             }
             debugstr.append(consequence + ": " + to_string(val));
