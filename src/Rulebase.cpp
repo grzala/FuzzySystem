@@ -17,6 +17,13 @@ Rulebase::Rulebase(string name, vector<string> rules)
     }
 }
 
+Rulebase::Rulebase(string name, vector<Rule> rules)
+{
+    this->name = name;
+
+    this->rules = rules;
+}
+
 Rulebase::~Rulebase()
 {
     //dtor

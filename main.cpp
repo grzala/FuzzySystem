@@ -57,20 +57,36 @@ void test_inference()
     Rule r4("if temperature is low and current is low then change_in_current is increase)");
 
     //construct rulebase
-    //Rulebase rulebase("thermostat", vector<Rule> {r1, r2, r3, r4});
+    Rulebase rulebase(string("thermostat"), vector<Rule> {r1, r2, r3, r4});
 
     //initialize inference angine
-    //InferenceEngine engine;
-    //engine.setRulebase(&rulebase);
+    InferenceEngine engine;
+    engine.setRulebase(&rulebase);
 
+    //normally using typedef, stripped down for transparency
+    string in_name1 = "temperature";
+    map<string, float> fuzzy_in1;
+    fuzzy_in1["low"] = 0.0;
+    fuzzy_in1["medium"] = 0.33;
+    fuzzy_in1["high"] = 0.33;
+    pair<string, map<string, float>> fuzzy_pair1(in_name1, fuzzy_in1);
 
+    string in_name2 = "current";
+    map<string, float> fuzzy_in2;
+    fuzzy_in2["low"] = 0.0;
+    fuzzy_in2["medium"] = 0.3;
+    fuzzy_in2["high"] = 0.7;
+    pair<string, map<string, float>> fuzzy_pair2(in_name2, fuzzy_in2);
+
+    vector<pair<string, map<string, float>>> inputs {fuzzy_pair1, fuzzy_pair1};
+
+    engine.infer(inputs);
+
+    std::cout << engine.strfyResults() << std::endl;
 }
 
 void run(string filename)
 {
-    set_log_level(log_level::BUILD);
-
-
     FuzzySystem fs;
     fs.initSettingsFromFile(filename);
 
@@ -91,15 +107,17 @@ void run(string filename)
 
 int main(int argc, char** argv)
 {
-    test_fuzzyfier();
-    //test_inference();
+    //set_log_level(log_level::BUILD);
+
+    //test_fuzzyfier();
+    test_inference();
 
     if (argc < 2) {
         std::cout << "No filename provided!" << endl;
         exit(1);
     }
     string filename = argv[1];
-    run(filename);
+    //run(filename);
 
     return 0;
 }

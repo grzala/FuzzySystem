@@ -26,6 +26,8 @@ class InferenceEngine
         void infer(fuzzy_engine_input in);
         fuzzy_engine_output getResult() { return result; }
 
+        string strfyResults();
+
     private:
         Rulebase* rb;
         fuzzy_engine_output result;

@@ -16,9 +16,10 @@ class Rulebase
     public:
         Rulebase();
         Rulebase(string name, vector<string> rules);
+        Rulebase(string name, vector<Rule>rules);
         virtual ~Rulebase();
 
-        string Getname() { return name; }
+        string getName() { return name; }
         string toString() {
             stringstream ss;
             ss << "Rulebase " << name << endl;

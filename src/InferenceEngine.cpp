@@ -84,3 +84,16 @@ void InferenceEngine::infer(fuzzy_engine_input in)
 
     this->result = result;
 }
+
+string InferenceEngine::strfyResults()
+{
+    stringstream sstream;
+
+    sstream << rb->getName() << " min-max aggregate:" << endl;
+    for (fuzzy_engine_output::iterator it = result.begin(); it != result.end(); ++it)
+    {
+        sstream << it->first << ": " << it->second << endl;
+    }
+
+    return sstream.str();
+}
