@@ -136,7 +136,9 @@ static Args args;
 
 int main(int argc, char** argv)
 {
-    set_log_level(log_level::BUILD);
+    #ifdef BUILD_FOR_DEVELOPMENT
+        set_log_level(log_level::BUILD);
+    #endif
 
     if (argc < 2) {
         std::cout << "No filename provided!" << endl;
@@ -171,7 +173,7 @@ int main(int argc, char** argv)
     {
         try {
             while(fs.run_from_stdin())
-                std::cout << fs.strfyResults() << std::endl;
+                std::cout << fs.strfyResults() << std::endl << std::endl;
         } catch (const exception& e) {
             cout << e.what() << endl;
         }
