@@ -76,8 +76,14 @@ void Defuzzyfier::defuzzyfy(map<string, float> in)
     console_debug("Sum1: " + to_string(sum1));
     console_debug("Sum2: " + to_string(sum2));
 
-    result = sum1/sum2;
-    result += min_x;
+    if (sum2 == 0) //prevent division by 0
+    {
+        result = 0.f;
+    } else
+    {
+        result = sum1/sum2;
+        result += min_x;
+    }
     console_debug("Result: " + to_string(result));
 }
 
