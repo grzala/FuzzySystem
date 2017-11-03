@@ -80,3 +80,8 @@ void Defuzzyfier::defuzzyfy(map<string, float> in)
     result += min_x;
     console_debug("Result: " + to_string(result));
 }
+
+string Defuzzyfier::strfyResults()
+{
+    return string("Defuzzyfication result: " + to_string(result));
+}

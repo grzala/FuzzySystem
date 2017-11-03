@@ -41,8 +41,8 @@ class FuzzySystem
         void run(vector<float> vals);
         bool run_from_stdin();
 
-        float getResult() {return currentResult;}
-        void printResult();
+        float getResults() {return currentResult;}
+        string strfyResults();
 
         vector<string> getFuzzyInNames() {
             vector<string> result;
@@ -50,6 +50,9 @@ class FuzzySystem
             return result;
         }
         string getFuzzyOutName() { return k.fuzzyOut.getName(); }
+        unsigned int inputCount() { return k.fuzzyIn.size(); }
+        int fuzzyVariableCount() { return k.fuzzyIn.size() + 1; }
+
         vector<float> getCurrentValues() { return currentValues; }
 
         void checkKnowledgebaseIntegrity(KnowledgeBase k);

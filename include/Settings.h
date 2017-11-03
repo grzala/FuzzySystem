@@ -28,9 +28,6 @@ struct Settings
 
 
     vector<fuzzy_pair> fuzzy_pairs;
-
-    string value1;
-    string value2;
 };
 
 extern int init_settings_from_file(Settings& s, const char* path);

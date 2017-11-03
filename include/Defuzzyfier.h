@@ -18,6 +18,7 @@ class Defuzzyfier
         void defuzzyfy(map<string, float> in);
 
         float getResult() { return result; }
+        string strfyResults();
 
     private:
 

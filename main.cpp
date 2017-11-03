@@ -63,67 +63,129 @@ void test_inference()
     InferenceEngine engine;
     engine.setRulebase(&rulebase);
 
+    const unsigned int ins_no = 3;
+    float ins1[ins_no][3] = {{0.0, 0.33, 0.33}, {0.2, 0.5, 0.0}, {0.7, 0.2, 0.0}};
+    float ins2[ins_no][3] = {{0.0, 0.3, 0.7}, {0.0, 1.0, 0.0}, {0.8, 0.1, 0.0}};
+
     //normally using typedef, stripped down for transparency
-    string in_name1 = "temperature";
-    map<string, float> fuzzy_in1;
-    fuzzy_in1["low"] = 0.0;
-    fuzzy_in1["medium"] = 0.33;
-    fuzzy_in1["high"] = 0.33;
-    pair<string, map<string, float>> fuzzy_pair1(in_name1, fuzzy_in1);
+    for (unsigned int i = 0; i < ins_no; ++i)
+    {
+        string in_name1 = "temperature";
+        map<string, float> fuzzy_in1;
+        fuzzy_in1["low"] = ins1[i][0];
+        fuzzy_in1["medium"] = ins1[i][1];
+        fuzzy_in1["high"] = ins1[i][2];
+        pair<string, map<string, float>> fuzzy_pair1(in_name1, fuzzy_in1);
+        std::cout << "Running for input: " << std::endl;
+        std::cout << fuzzy_pair1.first << ": {low: " << fuzzy_pair1.second["low"] << ", medium: " << fuzzy_pair1.second["medium"] << ", high: " << fuzzy_pair1.second["high"] << "}\n";
 
-    string in_name2 = "current";
-    map<string, float> fuzzy_in2;
-    fuzzy_in2["low"] = 0.0;
-    fuzzy_in2["medium"] = 0.3;
-    fuzzy_in2["high"] = 0.7;
-    pair<string, map<string, float>> fuzzy_pair2(in_name2, fuzzy_in2);
+        string in_name2 = "current";
+        map<string, float> fuzzy_in2;
+        fuzzy_in2["low"] = ins2[i][0];
+        fuzzy_in2["medium"] = ins2[i][1];
+        fuzzy_in2["high"] = ins2[i][2];
+        pair<string, map<string, float>> fuzzy_pair2(in_name2, fuzzy_in2);
+        std::cout << fuzzy_pair2.first << ": {low: " << fuzzy_pair2.second["low"] << ", medium: " << fuzzy_pair2.second["medium"] << ", high: " << fuzzy_pair2.second["high"] << "}\n";
 
-    vector<pair<string, map<string, float>>> inputs {fuzzy_pair1, fuzzy_pair1};
+        vector<pair<string, map<string, float>>> inputs {fuzzy_pair1, fuzzy_pair2};
 
-    engine.infer(inputs);
+        std::cout << "Start Inference engine...\n";
+        engine.infer(inputs);
 
-    std::cout << engine.strfyResults() << std::endl;
-}
-
-void run(string filename)
-{
-    FuzzySystem fs;
-    fs.initSettingsFromFile(filename);
-
-    //std::vector<float> vals {17, 300};
-    std::map<string, float> vals;
-    //vals["temperature"] = 300;
-    //vals["wind_speed"] = 17;
-    //vals["humidity"] = 100;
-
-    try {
-        //fs.run(vals);
-        while(fs.run_from_stdin())
-            fs.printResult();
-    } catch (const exception& e) {
-        cout << e.what() << endl;
+        std::cout << "Output:\n" << engine.strfyResults() << std::endl;
+        std::cout << std::endl;
     }
 }
 
+void test_defuzzyfier()
+{
+    //fuzzy variable temperature, 3 fuzzy sets
+    FuzzySet out1("decrease -50 -50 50 50");
+    FuzzySet out2("no_change 0 0 50 50");
+    FuzzySet out3("increase 50 50 50 50");
+    FuzzyVariable out("change_in_current", std::vector<FuzzySet> {out1, out2, out3});
+
+    Defuzzyfier deffuzyfier;
+    deffuzyfier.setFuzzyOutput(&out);
+
+    const int in_no = 3;
+    float in_vals[in_no][3] = {{0.7, 0.33, 0.0}, {0.0, 0.5, 0.0}, {0.0, 0.2, 0.3}};
+
+    for (int i = 0; i < in_no; i++)
+    {
+        std::cout << "Deffuzying values: " << std::endl;
+        std::cout << "decrease: " << in_vals[i][0] << "; " << "no_change: " << in_vals[i][1] << "; " << "increase: " << in_vals[i][2] << ";" << std::endl;
+
+        map<string, float> in;
+        in["decrease"] = in_vals[i][0];
+        in["no_change"] = in_vals[i][1];
+        in["increase"] = in_vals[i][2];
+
+        std::cout << "Defuzzyfying..." << std::endl;
+
+        deffuzyfier.defuzzyfy(in);
+
+        std::cout << deffuzyfier.strfyResults() << std::endl << std::endl;
+    }
+}
+
+typedef struct {
+    const char* command_line = "-c";
+} Args;
+static Args args;
+
 int main(int argc, char** argv)
 {
-    //set_log_level(log_level::BUILD);
-
-    //test_fuzzyfier();
-    test_inference();
+    set_log_level(log_level::BUILD);
 
     if (argc < 2) {
         std::cout << "No filename provided!" << endl;
         exit(1);
     }
-    string filename = argv[1];
-    //run(filename);
+
+    //parse parameters
+    string filename; bool filename_initialized = false;
+    vector<float> inputs;
+    bool run_from_cmd = false;
+    for (int i = 1; i < argc; ++i)
+    {
+        if ((strcmp(args.command_line, argv[i]) == 0))
+        {
+            run_from_cmd = true;
+        } else if (!filename_initialized)
+        {
+            filename = argv[i];
+            filename_initialized = true;
+        } else
+        {
+            inputs.push_back(stof(argv[i]));
+        }
+    }
+
+
+    FuzzySystem fs;
+    fs.initSettingsFromFile(filename);
+
+    //run
+    if (run_from_cmd)
+    {
+        try {
+            while(fs.run_from_stdin())
+                std::cout << fs.strfyResults() << std::endl;
+        } catch (const exception& e) {
+            cout << e.what() << endl;
+        }
+    } else
+    {
+        if (inputs.size() != fs.inputCount()) {
+            std::cout << "Not enough inputs provided" << endl;
+            exit(1);
+        }
+
+        fs.run(inputs);
+        std::cout << fs.strfyResults() << std::endl;
+    }
+
 
     return 0;
 }
-
-/*
-
-
-    return 0;
-*/

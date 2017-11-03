@@ -18,8 +18,11 @@ void InferenceEngine::infer(fuzzy_engine_input in)
 {
     vector<Rule> rules = rb->getRules();
 
+    console_debug("Build input map");
     map<string, fuzzy_values> input_map;
-    for (auto i : in) input_map[i.first] = i.second;
+    for (auto i : in) {
+        input_map[i.first] = i.second;
+    }
 
 
     //infer
@@ -46,6 +49,10 @@ void InferenceEngine::infer(fuzzy_engine_input in)
                 values.push_back(input_map[inputNames[i]][inputConditions[i]]);
                 debugstr.append(inputNames[i] + ": " + inputConditions[i] + ", ");
             }
+
+            debugstr.append("possible values: ");
+            for (float v : values)
+                debugstr.append(to_string(v) + " ");
 
             float val;
             if (rule.getOperand() == OR) {
@@ -75,11 +82,6 @@ void InferenceEngine::infer(fuzzy_engine_input in)
         } else {
             result[name] = max(val, result[name]);
         }
-    }
-
-    console_log("Inference results:");
-    for (const auto r : result) {
-        console_debug(r.first + ": " + to_string(r.second));
     }
 
     this->result = result;

@@ -67,7 +67,7 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
     //interpret
     enum readState {
         RULEBASE,
-        INPUT,
+        FUZZY_INPUT,
         FINISHED,
     };
 
@@ -97,10 +97,10 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
                 }
                 console_log("");
 
-                state = INPUT;
+                state = FUZZY_INPUT;
             break;
 
-        case INPUT:
+        case FUZZY_INPUT:
             {
                 //get first non empty
                 console_log("Parsing crisp...");

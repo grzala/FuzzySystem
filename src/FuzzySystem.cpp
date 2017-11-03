@@ -148,6 +148,7 @@ void FuzzySystem::run()
     fuzzyfier.fuzzyfy(currentValues);
     fuzzyfier_output fuzzyfied = fuzzyfier.getResult();
     console_log("Values fuzzified");
+    console_debug(fuzzyfier.strfyResults());
 
     //infer
     console_log("Start Inference engine");
@@ -155,15 +156,17 @@ void FuzzySystem::run()
     engine.infer(engine_in);
 
     fuzzy_engine_output fuzzy_output = engine.getResult();
+    console_log("Inference finished");
+    console_debug(engine.strfyResults());
 
     //defuzzyfy
     defuzzyfier.defuzzyfy(fuzzy_output);
     currentResult = defuzzyfier.getResult();
 }
 
-void FuzzySystem::printResult()
+string FuzzySystem::strfyResults()
 {
-    cout << k.fuzzyOut.getName() + " is " + to_string(currentResult) << endl;
+    return k.fuzzyOut.getName() + " is " + to_string(currentResult);
 }
 
 int find_fuzzy_by_name(vector<FuzzyVariable> fuzzys, string target) {
