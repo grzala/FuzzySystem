@@ -1,0 +1,39 @@
+GCC := g++
+
+SRC_DIR := src
+OBJ_DIR := obj
+BIN_DIR := bin
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+CXXFLAGS := -Iinclude -std=c++11 -Os
+LDFLAGS := -static
+
+MKDIR := md
+RMDIR := rd /s /q
+RMFILE := del /s
+CMD_EXTENSIONS := cmd /E:ON /C
+
+all: directories fuzzy.exe
+
+fuzzy.exe: main $(OBJ_FILES)
+	$(GCC) -o $(BIN_DIR)/$@ $(OBJ_DIR)/main.o $(OBJ_FILES) $(LDFLAGS)
+
+main:
+	$(GCC) $(CXXFLAGS) -c main.cpp -o $(OBJ_DIR)/main.o
+	
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(GCC) $(CXXFLAGS) -c $< -o $@
+
+directories:
+	$(CMD_EXTENSIONS) if not exist $(OBJ_DIR) $(MKDIR) $(OBJ_DIR)
+	$(CMD_EXTENSIONS) if not exist $(BIN_DIR) $(MKDIR) $(BIN_DIR)
+
+clean:
+	$(CMD_EXTENSIONS) if exist $(OBJ_DIR) $(RMFILE) $(OBJ_DIR)\* 
+	$(CMD_EXTENSIONS) if exist $(BIN_DIR) $(RMFILE) $(BIN_DIR)\*
+	
+purge:
+	$(CMD_EXTENSIONS) if exist $(OBJ_DIR) $(RMDIR) $(OBJ_DIR)
+	$(CMD_EXTENSIONS) if exist $(BIN_DIR) $(RMDIR) $(BIN_DIR)
+	

@@ -11,10 +11,11 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="example2.txt" />
+				<Option parameters="exwindows.txt -c" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-DBUILD_FOR_DEVELOPMENT" />
 					<Add directory="include" />
 				</Compiler>
 			</Target>
@@ -25,6 +26,19 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Compiler>
+					<Add option="-Os" />
+					<Add option="-std=c++11" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Fuzzy" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option use_console_runner="0" />
+				<Compiler>
+					<Add option="-Os" />
 					<Add option="-std=c++11" />
 					<Add directory="include" />
 				</Compiler>
@@ -36,6 +50,7 @@
 		<Unit filename="example.txt" />
 		<Unit filename="example2.txt" />
 		<Unit filename="examplee.txt" />
+		<Unit filename="exwindows.txt" />
 		<Unit filename="include/Defuzzyfier.h" />
 		<Unit filename="include/FuzzySet.h" />
 		<Unit filename="include/FuzzySystem.h" />
@@ -48,6 +63,7 @@
 		<Unit filename="include/Settings.h" />
 		<Unit filename="main.cpp">
 			<Option target="Debug" />
+			<Option target="Release" />
 		</Unit>
 		<Unit filename="src/Defuzzyfier.cpp" />
 		<Unit filename="src/FuzzySet.cpp" />

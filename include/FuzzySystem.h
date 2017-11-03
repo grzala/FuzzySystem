@@ -33,6 +33,7 @@ class FuzzySystem
         void initSettingsFromFile(string s) {initSettingsFromFile(s.c_str());}
         void initSettingsFromFile(const char* path);
         void init();
+        bool isInitialized() { return initialized; }
 
         void applyValues(map<string, float> vals);
 

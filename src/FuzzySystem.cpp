@@ -97,7 +97,7 @@ void FuzzySystem::init()
 void FuzzySystem::initSettingsFromFile(const char* path)
 {
     Settings s;
-    init_settings_from_file(s, path);
+    if (init_settings_from_file(s, path) == 0) throw runtime_error("File "+string(path)+" not found!");
     applySettings(s);
 }
 

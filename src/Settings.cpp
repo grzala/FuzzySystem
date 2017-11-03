@@ -4,7 +4,7 @@ int read_from_file(string& content, const char* path)
 {
     //open file
     ifstream inFile;
-    inFile.open(path);
+    inFile.open(path, ios_base::binary);
 
     //if file does not exists, report exception
     if (!inFile)
@@ -15,6 +15,11 @@ int read_from_file(string& content, const char* path)
     contentstream << inFile.rdbuf();
     content = contentstream.str();
     transform(content.begin(), content.end(), content.begin(), ::tolower);
+
+    //windows uses carriage returns - other OS do not
+    #if !(_WIN64) && !(_WIN32)
+    content.erase(remove(content.begin(), content.end(), '\r'), content.end());
+    #endif
 
     //close file
     inFile.close();
@@ -60,9 +65,16 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
 
     for (string line; getline(iss, line);)
     {
-        if (line.size() == 0 || (line.size() > 1 && line.at(0) != '#')) //ignore comments
+        if (!(line.size() > 1 && line.at(0) == '#')) //ignore comments
             lines.push_back(line);
     }
+
+    cout << "NOW PRINTING ALLE LINER: " << endl;
+    for (auto line : lines)
+    {
+        cout << line << endl;
+    }
+    cout << endl << endl;
 
     //interpret
     enum readState {

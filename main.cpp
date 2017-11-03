@@ -1,5 +1,6 @@
 #include <iostream>
 #include <exception>
+#include <cstring>
 
 #include "Log.h"
 #include "FuzzySystem.h"
@@ -166,7 +167,14 @@ int main(int argc, char** argv)
 
 
     FuzzySystem fs;
-    fs.initSettingsFromFile(filename);
+
+    try {
+        fs.initSettingsFromFile(filename);
+    } catch (std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+        exit(1);
+    }
 
     //run
     if (run_from_cmd)
@@ -180,7 +188,7 @@ int main(int argc, char** argv)
     } else
     {
         if (inputs.size() != fs.inputCount()) {
-            std::cout << "Not enough inputs provided" << endl;
+            std::cout << "Wrong number of inputs provided" << endl;
             exit(1);
         }
 

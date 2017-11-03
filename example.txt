@@ -22,6 +22,3 @@ tip
 small 50 50 50 50
 moderate 100 100 50 50
 big 150 150 50 50
-
-journey_time = 9
-driving = 65

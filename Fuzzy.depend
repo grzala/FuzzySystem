@@ -4,6 +4,8 @@
 	<stdexcept>
 	"Settings.h"
 
+1509627200 h"
+
 1508091641 source:c:\users\grzala\desktop\fuzzy\src\settings.cpp
 	"Settings.h"
 
@@ -28,11 +30,15 @@
 	<iterator>
 	<exception>
 
+1509627200 >
+
 1508108116 source:c:\users\grzala\desktop\fuzzy\src\fuzzyset.cpp
 	"FuzzySet.h"
 
 1508108058 source:c:\users\grzala\desktop\fuzzy\src\crisp.cpp
 	"Crisp.h"
+
+1508450984 
 
 1508108101 c:\users\grzala\desktop\fuzzy\include\crisp.h
 	<string>
@@ -61,11 +67,13 @@
 1508108551 source:c:\users\grzala\desktop\fuzzy\src\rule.cpp
 	"Rule.h"
 
-1509717403 source:c:\users\grzala\onedrive\fuzzy\main.cpp
+1509719277 source:c:\users\grzala\onedrive\fuzzy\main.cpp
 	<iostream>
 	<exception>
 	"Log.h"
 	"FuzzySystem.h"
+
+1509719235 em.h"
 
 1509716207 c:\users\grzala\onedrive\fuzzy\include\settings.h
 	<iostream>
@@ -128,16 +136,20 @@
 1509627200 source:c:\users\grzala\onedrive\fuzzy\src\fuzzyfier.cpp
 	"Fuzzyfier.h"
 
+1508346383 .h"
+
 1509627200 c:\users\grzala\onedrive\fuzzy\include\fuzzyfier.h
 	<string>
 	<array>
 	<exception>
 	"FuzzyVariable.h"
 
-1509661585 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
+1509645581 able.h"
+
+1509719235 source:c:\users\grzala\onedrive\fuzzy\src\fuzzysystem.cpp
 	"FuzzySystem.h"
 
-1509716756 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
+1509719030 c:\users\grzala\onedrive\fuzzy\include\fuzzysystem.h
 	<exception>
 	"Settings.h"
 	"Rulebase.h"
@@ -145,6 +157,8 @@
 	"Fuzzyfier.h"
 	"InferenceEngine.h"
 	"Defuzzyfier.h"
+
+1509718228 er.h"
 
 1508346383 source:c:\users\grzala\onedrive\fuzzy\src\settings2.cpp
 	"Settings2.h"
@@ -193,6 +207,8 @@
 1509645481 source:c:\users\grzala\onedrive\fuzzy\src\inferenceengine.cpp
 	"InferenceEngine.h"
 
+1509645481 Engine.h"
+
 1508448326 source:c:\users\grzala\onedrive\fuzzy\src\deffuzyfier.cpp
 	"Deffuzyfier.h"
 
@@ -204,6 +220,120 @@
 	"Log.h"
 	"FuzzyVariable.h"
 
-1509645608 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
+1509718228 source:c:\users\grzala\onedrive\fuzzy\src\defuzzyfier.cpp
 	"Defuzzyfier.h"
+
+1509736145 source:/home/grzala/Desktop/Fuzzy/main.cpp
+	<iostream>
+	<exception>
+	<cstring>
+	"Log.h"
+	"FuzzySystem.h"
+
+1508454584 /home/grzala/Desktop/Fuzzy/include/Log.h
+	<iostream>
+	<string>
+
+1509719030 /home/grzala/Desktop/Fuzzy/include/FuzzySystem.h
+	<exception>
+	"Settings.h"
+	"Rulebase.h"
+	"FuzzyVariable.h"
+	"Fuzzyfier.h"
+	"InferenceEngine.h"
+	"Defuzzyfier.h"
+
+1509716207 /home/grzala/Desktop/Fuzzy/include/Settings.h
+	<iostream>
+	<string>
+	<vector>
+	<array>
+	<algorithm>
+	<fstream>
+	<sstream>
+	<istream>
+	"Log.h"
+
+1509627200 /home/grzala/Desktop/Fuzzy/include/Rulebase.h
+	<string>
+	<sstream>
+	<vector>
+	"Rule.h"
+
+1509627200 /home/grzala/Desktop/Fuzzy/include/Rule.h
+	<iostream>
+	<string>
+	<regex>
+	<algorithm>
+	<exception>
+	"Log.h"
+
+1509627200 /home/grzala/Desktop/Fuzzy/include/FuzzyVariable.h
+	<string>
+	<sstream>
+	<array>
+	<map>
+	<vector>
+	<exception>
+	"FuzzySet.h"
+
+1509738653 /home/grzala/Desktop/Fuzzy/include/FuzzySet.h
+	<iostream>
+	<string>
+	<sstream>
+	<array>
+	<vector>
+	<algorithm>
+	<iterator>
+	<exception>
+
+1509627200 /home/grzala/Desktop/Fuzzy/include/Fuzzyfier.h
+	<string>
+	<array>
+	<exception>
+	"FuzzyVariable.h"
+
+1509627200 /home/grzala/Desktop/Fuzzy/include/InferenceEngine.h
+	<string>
+	<array>
+	<map>
+	<algorithm>
+	"Rulebase.h"
+	"FuzzyVariable.h"
+	"Log.h"
+
+1509645581 /home/grzala/Desktop/Fuzzy/include/Defuzzyfier.h
+	<exception>
+	"Log.h"
+	"FuzzyVariable.h"
+
+1509718228 source:/home/grzala/Desktop/Fuzzy/src/Defuzzyfier.cpp
+	"Defuzzyfier.h"
+
+1509627200 source:/home/grzala/Desktop/Fuzzy/src/Fuzzyfier.cpp
+	"Fuzzyfier.h"
+
+1509627200 source:/home/grzala/Desktop/Fuzzy/src/FuzzySet.cpp
+	"FuzzySet.h"
+
+1509719235 source:/home/grzala/Desktop/Fuzzy/src/FuzzySystem.cpp
+	"FuzzySystem.h"
+
+1509627200 source:/home/grzala/Desktop/Fuzzy/src/FuzzyVariable.cpp
+	"FuzzyVariable.h"
+
+1509645481 source:/home/grzala/Desktop/Fuzzy/src/InferenceEngine.cpp
+	"InferenceEngine.h"
+
+1508454590 source:/home/grzala/Desktop/Fuzzy/src/Log.cpp
+	"Log.h"
+
+1509740879 source:/home/grzala/Desktop/Fuzzy/src/Rule.cpp
+	"Rule.h"
+
+1509627200 source:/home/grzala/Desktop/Fuzzy/src/Rulebase.cpp
+	"Rulebase.h"
+
+1509740091 source:/home/grzala/Desktop/Fuzzy/src/Settings.cpp
+	"Settings.h"
 
