@@ -68,14 +68,7 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
         if (!(line.size() > 1 && line.at(0) == '#')) //ignore comments
             lines.push_back(line);
     }
-
-    cout << "NOW PRINTING ALLE LINER: " << endl;
-    for (auto line : lines)
-    {
-        cout << line << endl;
-    }
-    cout << endl << endl;
-
+    
     //interpret
     enum readState {
         RULEBASE,
