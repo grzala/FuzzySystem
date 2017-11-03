@@ -37,7 +37,7 @@ directories:
 make_lib:
 	$(MKDIR) $(LIB_DIR)
 
-clean: clean_obj clean_bin
+clean: clean_obj clean_bin clean_lib
 
 clean_obj:
 	$(RMFILE) $(OBJ_DIR)/*

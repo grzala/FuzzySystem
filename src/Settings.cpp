@@ -16,10 +16,8 @@ int read_from_file(string& content, const char* path)
     content = contentstream.str();
     transform(content.begin(), content.end(), content.begin(), ::tolower);
 
-    //windows uses carriage returns - other OS do not
-    #if !(_WIN64) && !(_WIN32)
+    //carriage return causes unprecitable behaviour
     content.erase(remove(content.begin(), content.end(), '\r'), content.end());
-    #endif
 
     //close file
     inFile.close();
@@ -68,7 +66,7 @@ int fsm::init_settings_from_file(Settings& s, const char* path)
         if (!(line.size() > 1 && line.at(0) == '#')) //ignore comments
             lines.push_back(line);
     }
-    
+
     //interpret
     enum readState {
         RULEBASE,

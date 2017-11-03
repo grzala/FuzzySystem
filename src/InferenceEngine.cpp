@@ -54,7 +54,7 @@ void InferenceEngine::infer(fuzzy_engine_input in)
             for (float v : values)
                 debugstr.append(to_string(v) + " ");
 
-            float val;
+            float val = 0.f;
             if (rule.getOperand() == OR) {
                 debugstr.append("OR");
                 val = *max_element(values.begin(), values.end());

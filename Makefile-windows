@@ -1,17 +1,28 @@
 GCC := g++
+STATIC_CC := ar
+SHARED_CC := g++
 
 SRC_DIR := src
 OBJ_DIR := obj
 BIN_DIR := bin
+LIB_DIR := lib
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 CXXFLAGS := -Iinclude -std=c++11 -Os
 LDFLAGS := -static
+STATICFLAGS := -r -s 
+SHAREDFLAGS := -shared 
 
 MKDIR := md
 RMDIR := rd /s /q
 RMFILE := del /s
 CMD_EXTENSIONS := cmd /E:ON /C
+
+shared: directories make_lib clean_lib $(OBJ_FILES)
+	$(SHARED_CC) $(SHAREDFLAGS) -Wl,--output-def=lib\libFuzzy.def -Wl,--out-implib=lib\libFuzzy.a -Wl,--dll $(OBJ_FILES) -o bin\Fuzzy.dll
+
+static: directories make_lib clean_lib $(OBJ_FILES)
+	$(STATIC_CC) $(STATICFLAGS) $(LIB_DIR)/libfFuzzy.a $(OBJFILES)
 
 all: directories fuzzy.exe
 
@@ -24,16 +35,27 @@ main:
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(GCC) $(CXXFLAGS) -c $< -o $@
+	
+make_lib:
+	$(CMD_EXTENSIONS) if not exist $(LIB_DIR) $(MKDIR) $(LIB_DIR)
 
 directories:
 	$(CMD_EXTENSIONS) if not exist $(OBJ_DIR) $(MKDIR) $(OBJ_DIR)
 	$(CMD_EXTENSIONS) if not exist $(BIN_DIR) $(MKDIR) $(BIN_DIR)
 
-clean:
+clean: clean_obj clean_bin clean_lib
+
+clean_obj:
 	$(CMD_EXTENSIONS) if exist $(OBJ_DIR) $(RMFILE) $(OBJ_DIR)\* 
+
+clean_bin:
 	$(CMD_EXTENSIONS) if exist $(BIN_DIR) $(RMFILE) $(BIN_DIR)\*
+
+clean_lib:
+	$(CMD_EXTENSIONS) if exist $(LIB_DIR) $(RMFILE) $(LIB_DIR)\*
 	
 purge:
 	$(CMD_EXTENSIONS) if exist $(OBJ_DIR) $(RMDIR) $(OBJ_DIR)
 	$(CMD_EXTENSIONS) if exist $(BIN_DIR) $(RMDIR) $(BIN_DIR)
+	$(CMD_EXTENSIONS) if exist $(LIB_DIR) $(RMDIR) $(LIB_DIR)
 	
