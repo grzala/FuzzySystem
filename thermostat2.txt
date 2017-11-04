@@ -1,0 +1,27 @@
+thermostat rulebase
+
+If temperature is high and current is high then change_in_current is decrease
+If temperature is medium then change_in_current is no_change
+If temperature is low and current is high then change_in_current is no_change
+If temperature is low and current is low then change_in_current is increase
+If the temperature is very_low and current is medium then change_in_current is increase
+If the temperature is very_low and current is low then change_in_current is increase
+
+current
+
+low 0 0 0 10
+medium 10 10 10 10
+high 20 20 10 0
+
+temperature
+
+very_low 0 40 0 40
+low 100 100 40 100
+medium 200 200 150 150
+high 400 450 150 0
+
+change_in_current
+
+decrease -50 -50 50 50
+no_change 0 0 50 50
+increase 50 50 50 50

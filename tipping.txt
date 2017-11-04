@@ -1,4 +1,4 @@
-tippingRulebase
+tipping rulebase
 
 Rule 1 If the driving is good and the journey_time is short then the tip is big
 Rule 2 If the driving is good or the journey_time is short then the tip is moderate
