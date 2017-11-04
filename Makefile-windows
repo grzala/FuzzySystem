@@ -18,13 +18,13 @@ RMDIR := rd /s /q
 RMFILE := del /s
 CMD_EXTENSIONS := cmd /E:ON /C
 
+all: directories fuzzy.exe
+
 shared: directories make_lib clean_lib $(OBJ_FILES)
 	$(SHARED_CC) $(SHAREDFLAGS) -Wl,--output-def=lib\libFuzzy.def -Wl,--out-implib=lib\libFuzzy.a -Wl,--dll $(OBJ_FILES) -o bin\Fuzzy.dll
 
 static: directories make_lib clean_lib $(OBJ_FILES)
 	$(STATIC_CC) $(STATICFLAGS) $(LIB_DIR)/libfFuzzy.a $(OBJFILES)
-
-all: directories fuzzy.exe
 
 fuzzy.exe: main $(OBJ_FILES)
 	$(GCC) -o $(BIN_DIR)/$@ $(OBJ_DIR)/main.o $(OBJ_FILES) $(LDFLAGS)
