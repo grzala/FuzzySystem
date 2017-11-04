@@ -8,6 +8,7 @@ LIB_DIR := lib
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 CXXFLAGS := -Iinclude -std=c++11 -Os
+shared: CXXFLAGS := -Iinclude -std=c++11 -Os -fPIC
 LDFLAGS := 
 STATICFLAGS := -r -s 
 
@@ -15,17 +16,20 @@ MKDIR := mkdir -p
 RMDIR := rm -rf
 RMFILE := rm  -rf
 
-static: directories make_lib clean_lib $(OBJ_FILES)
-	$(STATIC_CC) $(STATICFLAGS) $(LIB_DIR)/libfuzzy.a $(OBJFILES)
 
 all: directories fuzzy
+
+shared: directories make_lib clean_lib $(OBJ_FILES)
+	$(GCC) -shared $(OBJ_FILES) -o bin/libFuzzy.so
+
+static: directories make_lib clean_lib $(OBJ_FILES)
+	$(STATIC_CC) $(STATICFLAGS) $(LIB_DIR)/libfuzzy.a $(OBJFILES)
 
 fuzzy: main $(OBJ_FILES)
 	$(GCC) -o $(BIN_DIR)/$@ $(OBJ_DIR)/main.o $(OBJ_FILES) $(LDFLAGS)
 
 main:
 	$(GCC) $(CXXFLAGS) -c main.cpp -o $(OBJ_DIR)/main.o
-	
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(GCC) $(CXXFLAGS) -c $< -o $@
