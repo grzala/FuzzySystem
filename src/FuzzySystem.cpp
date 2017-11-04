@@ -12,7 +12,7 @@ FuzzySystem::~FuzzySystem()
     //dtor
 }
 
-void FuzzySystem::applySettings(Settings s)
+int FuzzySystem::applySettings(Settings s)
 {
     //now apply settings.
     //do not changed settings until everything is properly initialized
@@ -26,7 +26,7 @@ void FuzzySystem::applySettings(Settings s)
         console_write("Failed to apply rulebase.");
         console_write(e.what());
         console_write("Settings not applied.");
-        return;
+        return 0;
     }
     console_log("Rulebase applied.");
 
@@ -51,7 +51,7 @@ void FuzzySystem::applySettings(Settings s)
         console_write("Error while applying crisp input settings.");
         console_write(e.what());
         console_write("Settings remain unchanged.");
-        return;
+        return 0;
     }
     console_log("Fuzzy settings applied.");
 
@@ -69,7 +69,7 @@ void FuzzySystem::applySettings(Settings s)
     {
         console_write(e.what());
         console_write("Settings not applied.");
-        return;
+        return 0;
     }
     console_log("Knowledge base holds integrity.");
 
@@ -78,6 +78,8 @@ void FuzzySystem::applySettings(Settings s)
     console_write("Settings applied.");
 
     init();
+
+    return 1;
 }
 
 void FuzzySystem::init()
@@ -98,7 +100,7 @@ void FuzzySystem::initSettingsFromFile(const char* path)
 {
     Settings s;
     if (init_settings_from_file(s, path) == 0) throw runtime_error("File "+string(path)+" not found!");
-    applySettings(s);
+    if (applySettings(s) == 0) throw runtime_error("File " + string(path) + " holds an ill defined rulebase. Settings not applied.");
 }
 
 void FuzzySystem::applyValues(map<string, float> vals)

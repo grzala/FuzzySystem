@@ -139,6 +139,8 @@ int main(int argc, char** argv)
 {
     #ifdef BUILD_FOR_DEVELOPMENT
         set_log_level(log_level::BUILD);
+    #elif BUILD_FOR_GUI
+        set_log_level(log_level::SILENT);
     #endif
 
     if (argc < 2) {

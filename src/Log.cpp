@@ -1,7 +1,7 @@
 #include "Log.h"
 
 
-static unsigned int level = 0;
+static unsigned int level = 1;
 
 void fsm::set_log_level(unsigned int i)
 {

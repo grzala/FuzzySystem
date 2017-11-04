@@ -29,7 +29,7 @@ class FuzzySystem
         FuzzySystem();
         virtual ~FuzzySystem();
 
-        void applySettings(Settings s);
+        int applySettings(Settings s);
         void initSettingsFromFile(string s) {initSettingsFromFile(s.c_str());}
         void initSettingsFromFile(const char* path);
         void init();

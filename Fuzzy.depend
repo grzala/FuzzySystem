@@ -436,10 +436,10 @@
 1509744628 source:c:\users\grzala\onedrive\fuzzysystem\src\fuzzyvariable.cpp
 	"FuzzyVariable.h"
 
-1509744628 source:c:\users\grzala\onedrive\fuzzysystem\src\inferenceengine.cpp
+1509745648 source:c:\users\grzala\onedrive\fuzzysystem\src\inferenceengine.cpp
 	"InferenceEngine.h"
 
-1509744628 source:c:\users\grzala\onedrive\fuzzysystem\src\log.cpp
+1509806685 source:c:\users\grzala\onedrive\fuzzysystem\src\log.cpp
 	"Log.h"
 
 1509744628 source:c:\users\grzala\onedrive\fuzzysystem\src\rule.cpp
@@ -448,6 +448,6 @@
 1509744628 source:c:\users\grzala\onedrive\fuzzysystem\src\rulebase.cpp
 	"Rulebase.h"
 
-1509744778 source:c:\users\grzala\onedrive\fuzzysystem\src\settings.cpp
+1509745373 source:c:\users\grzala\onedrive\fuzzysystem\src\settings.cpp
 	"Settings.h"
 

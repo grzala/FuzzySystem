@@ -1,0 +1,43 @@
+gearbox rulebase
+
+#rules
+if RPM is critical or RPM is high then change_gear is up
+if RPM is high and throttle is middle and profile is smooth then change_gear is up
+if RPM is low and throttle is up then change_gear is down
+if RPM is low and throttle is low then change_gear is down
+if RPM is medium and throttle is low and profile is sharp then change_gear is down
+if RPM is medium and throttle is floor then change_gear is down
+if RPM is medium and throttle is middle then change_gear is no_change
+if RPM is high and throttle is middle and profile is sharp then change_gear is no_change
+if RPM is medium and throttle is low and profile is smooth then change_gear is no_change
+
+
+#inputs
+
+throttle
+
+up 0 20 0 25
+middle 40 60 10 10
+low 70 85 10 10
+floor 100 100 15 0
+
+
+RPM
+
+low 1000 2000 0 500
+medium 3000 4000 1000 1000
+high 5000 6000 1000 1000
+critical 7000 12000 500 0
+
+
+profile
+
+smooth 0 0 0 10
+sharp 10 10 10 0
+
+#output
+change_gear
+
+down -1 -1 1 1
+no_change 0 0 1 1
+up 1 1 1 1
