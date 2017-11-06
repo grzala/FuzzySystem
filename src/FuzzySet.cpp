@@ -80,13 +80,13 @@ bool FuzzySet::operator >(const FuzzySet &other) const
 
 float FuzzySet::membership(float x)
 {
-    if (x > a - alpha && x < a)
-    {
-        return (x + (-a + alpha))/alpha;
-    }
-    else if (x >= a && x <= b)
+    if (x >= a && x <= b)
     {
         return 1.0f;
+    }
+    else if (x > a - alpha && x < a)
+    {
+        return (x + (-a + alpha))/alpha;
     }
     else if (x > b && x < b + beta)
     {

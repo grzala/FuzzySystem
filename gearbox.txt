@@ -15,10 +15,10 @@ if RPM is medium and throttle is middle then change_gear is up
 if RPM is high and throttle is middle then change_gear is up
 if RPM is high and profile is sharp then change_gear is no_change
 if RPM is medium and throttle is low and profile is smooth then change_gear is no_change
-if Rpm is low and throttle is up then change_gear is down
-if Rpm is medium and throttle is up and profile is smooth then change_gear is no_change
-if Rpm is medium and throttle is up and profile is sharp then change_gear is down
-if Rpm is medium and throttle is low then change_gear is no_change
+if RPM is low and throttle is up then change_gear is down
+if RPM is medium and throttle is up and profile is smooth then change_gear is no_change
+if RPM is medium and throttle is up and profile is sharp then change_gear is down
+if RPM is medium and throttle is low then change_gear is no_change
 
 
 #inputs
