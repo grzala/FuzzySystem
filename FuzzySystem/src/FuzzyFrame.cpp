@@ -48,8 +48,8 @@ void FuzzyFrame::run()
         }
 
         try {
-            fm->run(val1, val2);
-            float result = fm->getResult();
+            fm->run(std::vector<float>{val1, val2});
+            float result = fm->getResults();
             setResults(result);
         } catch (const exception& e) {
             cout << e.what() << endl;
@@ -126,6 +126,7 @@ void FuzzyFrame::InputSpin2UpClick( wxSpinEvent& event )
 
 void FuzzyFrame::selectFile(wxCommandEvent& event)
 {
+    std::cout << "SELECtiNG File";
     wxFileDialog* OpenDialog = new wxFileDialog(
 		this, _("Choose a file to open"), wxEmptyString, wxEmptyString,
 		_("Text files (*.txt)|*.txt|C++ Source Files (*.cpp, *.cxx)|*.cpp;*.cxx|C Source files (*.c)|*.c|C header files (*.h)|*.h"),
@@ -138,12 +139,14 @@ void FuzzyFrame::selectFile(wxCommandEvent& event)
 
         fm->initSettingsFromFile(path);
 
-        InputName1->SetLabelText(wxString(fm->getFuzzyIn1Name()));
-        InputName2->SetLabelText(wxString(fm->getFuzzyIn2Name()));
+        auto names = fm->getFuzzyInNames();
+
+        InputName1->SetLabelText(wxString(names[0]));
+        InputName2->SetLabelText(wxString(names[1]));
         OutputName->SetLabelText(wxString(fm->getFuzzyOutName()));
 
         //init with values loaded from file (or 0 0);
-        array<float, 2> curVals = fm->getCurrentValues();
+        auto curVals = fm->getCurrentValues();
         Input1->SetValue(wxString(to_string(curVals[0])));
         Input2->SetValue(wxString(to_string(curVals[1])));
 	}

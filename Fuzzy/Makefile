@@ -23,7 +23,7 @@ shared: directories make_lib clean_lib $(OBJ_FILES)
 	$(GCC) -shared $(OBJ_FILES) -o bin/libFuzzy.so
 
 static: directories make_lib clean_lib $(OBJ_FILES)
-	$(STATIC_CC) $(STATICFLAGS) $(LIB_DIR)/libfuzzy.a $(OBJFILES)
+	$(STATIC_CC) $(STATICFLAGS) $(LIB_DIR)/libfuzzy.a $(OBJ_FILES)
 
 fuzzy: main $(OBJ_FILES)
 	$(GCC) -o $(BIN_DIR)/$@ $(OBJ_DIR)/main.o $(OBJ_FILES) $(LDFLAGS)
